@@ -1,19 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
-
-    <item
-        jar="/Users/evgeniy/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/386a4339ffe52d5d63e80f9bed8d2b1d1a418249/android-async-http-1.4.9.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
-        <dex dex="/Users/evgeniy/Workspace/Code/take365/Android/take365-android/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.9_42985f8261d393b14b2dbec16deddd95c928ac64.jar" />
-    </item>
-    <item
-        jar="/Users/evgeniy/.gradle/caches/modules-2/files-2.1/cz.msebera.android/httpclient/4.3.6/526a9f794eab830eae4f23a62c572878b3f491ab/httpclient-4.3.6.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
-        <dex dex="/Users/evgeniy/Workspace/Code/take365/Android/take365-android/app/build/intermediates/pre-dexed/debug/httpclient-4.3.6_05dc853e722cf780a2e83e1b5dd5a9d2d82e1a21.jar" />
-    </item>
-
-</items>
+<items version="2" />
