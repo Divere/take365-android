@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="org.take365.take365.LoginActivity">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView2" android:layout_alignParentBottom="false"
+                android:layout_alignParentRight="false" android:layout_alignParentEnd="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false" android:src="@drawable/back" android:scaleType="centerCrop"
+                android:layout_alignWithParentIfMissing="false" android:layout_alignParentTop="true"
+                android:alpha="0.4"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logo" android:cropToPadding="true" android:layout_above="@+id/tfLogin"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+                android:layout_marginBottom="20dp" android:layout_marginLeft="25dp" android:layout_marginRight="25dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tfLogin" android:layout_centerVertical="true" android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" android:layout_marginLeft="25dp"
+                android:singleLine="true"
+                android:layout_marginRight="25dp" android:hint="логин" android:gravity="center_horizontal"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/tfPassword" android:layout_below="@+id/tfLogin"
+                android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+                android:layout_marginLeft="25dp" android:layout_marginRight="25dp" android:layout_marginTop="10dp"
+                android:hint="пароль" android:gravity="center_horizontal"/>
+        <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="войти"
+                android:id="@+id/btnSignIn" android:layout_below="@+id/tfPassword" android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" android:layout_marginRight="25dp" android:layout_marginTop="10dp"/>
+</RelativeLayout>

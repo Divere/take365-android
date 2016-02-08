@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "19.1.0"
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "org.take365.take365"
@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.code.gson:gson:2.5'
+    compile 'com.loopj.android:android-async-http:1.4.9'
 }
