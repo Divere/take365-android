@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="org.take365.take365">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
     <application
             android:name=".Take365Application"
             android:allowBackup="true"
@@ -23,6 +24,8 @@
                 android:label="@string/title_activity_main"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".UploadPhotoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

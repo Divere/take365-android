@@ -9,6 +9,7 @@ import com.loopj.android.http.RequestParams;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import org.take365.take365.Engine.Network.Models.Request.LoginRequest;
+import org.take365.take365.Engine.Network.Models.Request.StoryListRequest;
 import org.take365.take365.Engine.Network.Models.Response.BaseResponse;
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
 import org.take365.take365.Engine.Network.Models.StoryModel;
@@ -16,6 +17,7 @@ import org.take365.take365.Engine.Network.Models.StoryPrivateLevel;
 import org.take365.take365.Take365Application;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +29,7 @@ public class ApiManager {
     private static AsyncHttpClient client = new AsyncHttpClient();
     private static ApiManager instance = null;
     private static Context context;
+    private static String userName;
 
     public ApiEvents Events;
 
@@ -47,12 +50,14 @@ public class ApiManager {
         LoginRequest request = new LoginRequest();
         request.username = username;
         request.password = password;
+        this.userName = username;
 
         post("api/auth/login", request, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String json = new String(responseBody);
                 LoginResponse response = new Gson().fromJson(json, LoginResponse.class);
+                AccessToken = response.result.token;
                 if (Events != null && response.result != null) {
                     Events.loginCompleted(response.result, null);
                 }
@@ -70,11 +75,25 @@ public class ApiManager {
     }
 
     public void getStory(int storyId) {
-
     }
 
-    public void getStoryList() {
+    public void getStoryList(int page, int maxItems) {
+        StoryListRequest request = new StoryListRequest();
+        request.accessToken = this.AccessToken;
+        request.maxItems = maxItems;
+        request.page = page;
+        request.username = "me";
+        get("api/story/list?page=" + page + "&maxItems=" + maxItems + "&username=" + this.userName + "&accessToken=" + AccessToken, new AsyncHttpObjectResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                super.onFailure(statusCode, headers, responseBody, error);
+            }
+        });
     }
 
     public void createStory(String title, StoryPrivateLevel privateLevel, String description) {
@@ -85,6 +104,10 @@ public class ApiManager {
 
     }
 
+    public static void get(String method, AsyncHttpObjectResponseHandler handler) {
+        String reqest = URL + "/" + method;
+        client.post(reqest, handler);
+    }
 
     public static void post(String method, Object request, AsyncHttpResponseHandler handler) {
         StringEntity entity = null;
