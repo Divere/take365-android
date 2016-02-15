@@ -12,6 +12,7 @@ import org.take365.take365.Engine.Network.Models.Request.LoginRequest;
 import org.take365.take365.Engine.Network.Models.Request.StoryListRequest;
 import org.take365.take365.Engine.Network.Models.Response.BaseResponse;
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
+import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
 import org.take365.take365.Engine.Network.Models.StoryModel;
 import org.take365.take365.Engine.Network.Models.StoryPrivateLevel;
 import org.take365.take365.Take365Application;
@@ -77,16 +78,15 @@ public class ApiManager {
     public void getStory(int storyId) {
     }
 
-    public void getStoryList(int page, int maxItems) {
-        StoryListRequest request = new StoryListRequest();
-        request.accessToken = this.AccessToken;
-        request.maxItems = maxItems;
-        request.page = page;
-        request.username = "me";
-        get("api/story/list?page=" + page + "&maxItems=" + maxItems + "&username=" + this.userName + "&accessToken=" + AccessToken, new AsyncHttpObjectResponseHandler() {
+    public void getStoryList(String userName, int page, int maxItems) {
+        get("api/story/list?page=" + page + "&maxItems=" + maxItems + "&username=" + userName + "&accessToken=" + AccessToken, new AsyncHttpObjectResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                super.onSuccess(statusCode, headers, responseBody);
+                String json = new String(responseBody);
+                StoryListResponse response = new Gson().fromJson(json, StoryListResponse.class);
+                if (Events != null) {
+                    Events.getStoryListResult(response, null);
+                }
             }
 
             @Override
@@ -95,6 +95,7 @@ public class ApiManager {
             }
         });
     }
+
 
     public void createStory(String title, StoryPrivateLevel privateLevel, String description) {
 
@@ -106,7 +107,7 @@ public class ApiManager {
 
     public static void get(String method, AsyncHttpObjectResponseHandler handler) {
         String reqest = URL + "/" + method;
-        client.post(reqest, handler);
+        client.get(reqest, handler);
     }
 
     public static void post(String method, Object request, AsyncHttpResponseHandler handler) {

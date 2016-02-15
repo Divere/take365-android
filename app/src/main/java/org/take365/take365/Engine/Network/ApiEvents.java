@@ -1,6 +1,7 @@
 package org.take365.take365.Engine.Network;
 
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResult;
+import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryResult;
 import org.take365.take365.Engine.Network.Models.StoryModel;
 
@@ -14,7 +15,7 @@ public class ApiEvents {
     public void getStoryResult(StoryResult result, String error) {
     }
 
-    public void getStoryListResult(StoryModel[] result, String error) {
+    public void getStoryListResult(StoryListResponse result, String error) {
     }
 
     public void createStoryResult(StoryModel story, String error) {
