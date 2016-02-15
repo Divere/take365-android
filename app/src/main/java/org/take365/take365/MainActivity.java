@@ -16,10 +16,14 @@ import org.take365.take365.Controls.StoryListControl;
 import org.take365.take365.Engine.Network.ApiEvents;
 import org.take365.take365.Engine.Network.ApiManager;
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
+import org.take365.take365.Engine.Network.Models.StoryModel;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private int REQUEST_IMAGE_CAPTURE = 1;
     private StoryListControl storyListControl;
+    private List<StoryModel> storyModelList;
     private FrameLayout content;
 
     @Override
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 if (result.result.size()>0) {
                     setControl(storyListControl);
                     storyListControl.updateList(result.result);
+                    storyModelList = result.result;
                 }
             }
         };
