@@ -5,25 +5,23 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import org.take365.take365.Controls.StoryListControl;
 import org.take365.take365.Engine.Network.ApiEvents;
 import org.take365.take365.Engine.Network.ApiManager;
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
-import org.take365.take365.Engine.Network.Models.StoryModel;
+import org.take365.take365.Engine.Network.Models.StoryListItemModel;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private int REQUEST_IMAGE_CAPTURE = 1;
     private StoryListControl storyListControl;
-    private List<StoryModel> storyModelList;
+    private List<StoryListItemModel> storyModelList;
     private FrameLayout content;
 
     @Override

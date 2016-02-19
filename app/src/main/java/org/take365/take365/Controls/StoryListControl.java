@@ -1,6 +1,5 @@
 package org.take365.take365.Controls;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.take365.take365.Engine.Adapters.StoryListAdapter;
-import org.take365.take365.Engine.Network.Models.StoryModel;
+import org.take365.take365.Engine.Network.Models.StoryListItemModel;
 import org.take365.take365.R;
 import org.take365.take365.StoryActivity;
 
@@ -23,7 +22,7 @@ public class StoryListControl extends LinearLayout {
     Context context;
     ListView lvList;
     TextView tvNoStories;
-    List<StoryModel> storyList;
+    List<StoryListItemModel> storyList;
 
     public StoryListControl(Context context) {
         super(context);
@@ -43,7 +42,7 @@ public class StoryListControl extends LinearLayout {
         });
     }
 
-    public void updateList(List<StoryModel> storyList) {
+    public void updateList(List<StoryListItemModel> storyList) {
         if (storyList.size()>0) {
             StoryListAdapter adapter = new StoryListAdapter(context, storyList);
             lvList.setAdapter(adapter);

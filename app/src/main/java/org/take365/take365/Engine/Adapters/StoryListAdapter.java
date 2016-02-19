@@ -7,21 +7,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.take365.take365.Engine.Network.Models.StoryModel;
+import org.take365.take365.Engine.Network.Models.StoryListItemModel;
 import org.take365.take365.R;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Created by Ermakov-MAC on 15.02.16.
  */
 public class StoryListAdapter extends BaseAdapter {
 
-    private List<StoryModel> storyList;
+    private List<StoryListItemModel> storyList;
     private Context context;
 
-    public StoryListAdapter(Context context, List<StoryModel> storyList) {
+    public StoryListAdapter(Context context, List<StoryListItemModel> storyList) {
         this.storyList = storyList;
         this.context = context;
     }
@@ -50,7 +49,7 @@ public class StoryListAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.control_story_item, parent, false);
         }
 
-        StoryModel storyModel = storyList.get(position);
+        StoryListItemModel storyModel = storyList.get(position);
         TextView tvValue = ((TextView)view.findViewById(R.id.tvCurrentValue));
         TextView tvName = ((TextView)view.findViewById(R.id.tvStoryName));
         TextView tvPercent = (TextView)view.findViewById(R.id.tvPercent);

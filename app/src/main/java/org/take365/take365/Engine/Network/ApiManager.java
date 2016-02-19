@@ -5,20 +5,19 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import org.take365.take365.Engine.Network.Models.Request.LoginRequest;
-import org.take365.take365.Engine.Network.Models.Request.StoryListRequest;
 import org.take365.take365.Engine.Network.Models.Response.BaseResponse;
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
+import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailResponse;
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
-import org.take365.take365.Engine.Network.Models.StoryModel;
+import org.take365.take365.Engine.Network.Models.StoryListItemModel;
 import org.take365.take365.Engine.Network.Models.StoryPrivateLevel;
 import org.take365.take365.Take365Application;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +34,7 @@ public class ApiManager {
     public ApiEvents Events;
 
     public String AccessToken;
-    public ArrayList<StoryModel> Stories;
+    public ArrayList<StoryListItemModel> Stories;
 
     public static ApiManager getInstance() {
         if (instance == null) {
@@ -76,6 +75,21 @@ public class ApiManager {
     }
 
     public void getStory(int storyId) {
+        get("/api/story/" + storyId  + "?accessToken=" + AccessToken, new AsyncHttpObjectResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String json = new String(responseBody);
+                StoryDetailResponse response = new Gson().fromJson(json, StoryDetailResponse.class);
+                if (Events != null) {
+                    Events.getStoryResult(response.result, null);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                super.onFailure(statusCode, headers, responseBody, error);
+            }
+        });
     }
 
     public void getStoryList(String userName, int page, int maxItems) {
