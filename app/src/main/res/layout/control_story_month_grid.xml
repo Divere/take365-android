@@ -13,20 +13,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF0000"
+            android:textSize="20sp"
             android:id="@+id/txtMonth"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text=", "/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:id="@+id/txtYear"/>
     </LinearLayout>
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/llDateInfo">
+        android:layout_below="@id/llDateInfo"
+        android:columnWidth="90dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:id="@+id/gvPhotos">
 
     </GridView>
 </RelativeLayout>
