@@ -1,13 +1,22 @@
 package org.take365.take365.Engine.Network;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.entity.mime.HttpMultipartMode;
+import cz.msebera.android.httpclient.entity.mime.MultipartEntityBuilder;
+import cz.msebera.android.httpclient.entity.mime.content.ByteArrayBody;
+import cz.msebera.android.httpclient.entity.mime.content.FileBody;
+import cz.msebera.android.httpclient.entity.mime.content.StringBody;
+
 import org.take365.take365.Engine.Network.Models.Request.LoginRequest;
 import org.take365.take365.Engine.Network.Models.Response.BaseResponse;
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
@@ -17,6 +26,7 @@ import org.take365.take365.Engine.Network.Models.StoryListItemModel;
 import org.take365.take365.Engine.Network.Models.StoryPrivateLevel;
 import org.take365.take365.Take365Application;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
@@ -67,7 +77,7 @@ public class ApiManager {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 String json = new String(responseBody);
                 BaseResponse response = new Gson().fromJson(json, BaseResponse.class);
-                if(Events != null){
+                if (Events != null) {
                     Events.loginCompleted(null, response.errors[0].value);
                 }
             }
@@ -115,8 +125,45 @@ public class ApiManager {
 
     }
 
-    public void uploadImage(byte[] image, int storyId, String date) {
+    public void uploadImage(Bitmap image, int storyId, String date) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
 
+        try {
+//            [formData appendPartWithFormData:[@"image.jpg" dataUsingEncoding:NSUTF8StringEncoding] name:@"name"];
+//            [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d", storyId] dataUsingEncoding:NSUTF8StringEncoding] name:@"targetId"];
+//            [formData appendPartWithFormData:[@"2" dataUsingEncoding:NSUTF8StringEncoding] name:@"targetType"];
+//            [formData appendPartWithFormData:[@"storyImage" dataUsingEncoding:NSUTF8StringEncoding] name:@"mediaType"];
+//            [formData appendPartWithFormData:[date dataUsingEncoding:NSUTF8StringEncoding] name:@"date"];
+//            [formData appendPartWithFileData:image name:@"file" fileName:@"image.jpg" mimeType:@"image/jpeg"];
+//            [formData appendPartWithFormData:[_AccessToken dataUsingEncoding:NSUTF8StringEncoding] name:@"accessToken"];
+            HttpPost httppost = new HttpPost(URL + "/" +"/api/media/upload");
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.addPart("name", new ByteArrayBody("image.jpg".getBytes(), ""));
+            builder.addPart("targetType", new ByteArrayBody("2".getBytes(), ""));
+            builder.addPart("mediaType", new ByteArrayBody("storyImage".getBytes(), ""));
+            builder.addPart("file", new ByteArrayBody(byteArray, ""));
+            builder.addPart("date", new ByteArrayBody(date.getBytes(), ""));
+            builder.addPart("targetId", new ByteArrayBody(String.valueOf(storyId).getBytes(), ""));
+            builder.addPart("accessToken", new ByteArrayBody(AccessToken.getBytes(), ""));
+            HttpEntity entity = builder.build();
+            client.post(context, URL + "/" + "api/media/upload", entity, ""  ,new AsyncHttpObjectResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    super.onSuccess(statusCode, headers, responseBody);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    super.onFailure(statusCode, headers, responseBody, error);
+                    String json = new String(responseBody);
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e("Error uploading: ", e.getLocalizedMessage(), e);
+        }
     }
 
     public static void get(String method, AsyncHttpObjectResponseHandler handler) {

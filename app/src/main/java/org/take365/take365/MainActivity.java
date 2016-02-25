@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import org.take365.take365.Controls.StoryListControl;
 import org.take365.take365.Engine.Network.ApiEvents;
 import org.take365.take365.Engine.Network.ApiManager;
+import org.take365.take365.Engine.Network.GlobalContext;
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
 import org.take365.take365.Engine.Network.Models.StoryListItemModel;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     setControl(storyListControl);
                     storyListControl.updateList(result.result);
                     storyModelList = result.result;
+                    GlobalContext.getInstance().myStoriesList = storyModelList;
                 }
             }
         };
