@@ -35,7 +35,7 @@ import java.util.ArrayList;
  */
 public class ApiManager {
 
-    private static final String URL = "http://take365.org";
+    private static final String URL = "https://take365.org";
     private static AsyncHttpClient client = new AsyncHttpClient();
     private static ApiManager instance = null;
     private static Context context;
