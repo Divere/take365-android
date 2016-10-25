@@ -8,15 +8,15 @@ import android.content.Context;
  */
 public class Take365Application extends Application {
 
-    private static Context context;
+    private static Take365Application application;
 
     public void onCreate() {
         super.onCreate();
-        Take365Application.context = getApplicationContext();
+        application = this;
     }
 
     public static Context getAppContext() {
-        return Take365Application.context;
+        return application.getApplicationContext();
     }
-
 }
+;
