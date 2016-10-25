@@ -1,3 +1,7 @@
+/**
+ * Created by divere on 30.09.16.
+ */
+
 package org.take365.take365.Engine.Network;
 
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
@@ -9,10 +13,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
-/**
- * Created by divere on 30.09.16.
- */
 
 public interface Take365Service {
 

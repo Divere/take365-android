@@ -21,7 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiActivity extends AppCompatActivity {
 
     private static final String API_URI = "https://take365.org/api/";
-    private  static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
     private static Take365Service service;
     private static LoginResult currentUser;
@@ -40,6 +39,7 @@ public class ApiActivity extends AppCompatActivity {
     protected Take365Service setCurrentUser(final LoginResult result)
     {
         currentUser = result;
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
