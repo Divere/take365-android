@@ -12,20 +12,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
+import org.take365.take365.Views.StoryListView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends ApiActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends ApiActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RelativeLayout viewsContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        viewsContainer = (RelativeLayout) findViewById(R.id.content_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,6 +63,8 @@ public class MainActivity extends ApiActivity
 
             }
         });
+
+        setView(new StoryListView(this));
     }
 
     @Override
@@ -115,5 +122,11 @@ public class MainActivity extends ApiActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setView(View view)
+    {
+        viewsContainer.removeAllViews();
+        viewsContainer.addView(view);
     }
 }
