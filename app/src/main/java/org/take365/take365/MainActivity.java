@@ -1,5 +1,6 @@
 package org.take365.take365;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends ApiActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RelativeLayout viewsContainer;
 
@@ -29,6 +30,7 @@ public class MainActivity extends ApiActivity implements NavigationView.OnNaviga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Мои истории");
 
         viewsContainer = (RelativeLayout) findViewById(R.id.content_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -38,8 +40,7 @@ public class MainActivity extends ApiActivity implements NavigationView.OnNaviga
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, CreateStoryActivity.class));
             }
         });
 
@@ -51,18 +52,6 @@ public class MainActivity extends ApiActivity implements NavigationView.OnNaviga
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        getApi().storyList(getCurrentUser().username).enqueue(new Callback<StoryListResponse>() {
-            @Override
-            public void onResponse(Call<StoryListResponse> call, Response<StoryListResponse> response) {
-                
-            }
-
-            @Override
-            public void onFailure(Call<StoryListResponse> call, Throwable t) {
-
-            }
-        });
 
         setView(new StoryListView(this));
     }

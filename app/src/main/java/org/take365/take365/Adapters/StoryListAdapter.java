@@ -2,24 +2,44 @@ package org.take365.take365.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import org.take365.take365.Engine.Network.Models.StoryListItemModel;
+import org.take365.take365.R;
+
+import java.util.List;
 
 /**
  * Created by divere on 26/10/2016.
  */
 
 public class StoryListAdapter extends ArrayAdapter<StoryListItemModel> {
-    public StoryListAdapter(Context context, StoryListItemModel[] items) {
+    public StoryListAdapter(Context context, List<StoryListItemModel> items) {
         super(context, 0, items);
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return super.getView(position, convertView, parent);
+
+        StoryListItemModel item = this.getItem(position);
+
+        if(convertView == null) {
+            convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.view_storylistitem, parent, false);
+        }
+
+        TextView tvStoryName = (TextView) convertView.findViewById(R.id.tvStoryName);
+        TextView tvCompletedFrom = (TextView) convertView.findViewById(R.id.tvCompletedFrom);
+        TextView tvCompletedPercentage = (TextView) convertView.findViewById(R.id.tvCompletedPercentage);
+
+        tvStoryName.setText(item.title);
+        tvCompletedFrom.setText(String.valueOf(item.progress.totalImages));
+        tvCompletedPercentage.setText("(" + String.valueOf(item.progress.percentsComplete) + "%)");
+
+        return convertView;
     }
 }

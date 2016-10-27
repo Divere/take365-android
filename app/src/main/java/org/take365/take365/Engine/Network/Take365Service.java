@@ -20,6 +20,9 @@ public interface Take365Service {
     @POST("auth/login")
     Call<LoginResponse> login(@Field("username") String username, @Field("password") String password);
 
+    @GET("auth/reuse-token")
+    Call<LoginResponse> loginWithToken();
+
     @GET("story/list")
     Call<StoryListResponse> storyList(@Query("username") String username);
 }

@@ -8,6 +8,6 @@ public class StoryListItemModel {
     public int id;
     public StoryProgressModel progress;
     public int status;
-    public String titile;
+    public String title;
     public String utl;
 }
