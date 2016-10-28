@@ -18,6 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by evgeniy on 08.02.16.
  */
+
+
 public class Take365Application extends Application {
 
     private static Take365Application application;

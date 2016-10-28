@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.take365.take365.Engine.Network.Models.Request.LoginWithTokenRequest;
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
 
 import retrofit2.Call;
@@ -32,19 +33,18 @@ public class LoginActivity extends AppCompatActivity {
 
         String token = preferences.getString("access_token", null);
         if(token != null){
-            // TODO: 27/10/2016 temporary disabled because need fixes on server side
-//            Take365Application.setAccessToken(token);
-//            Take365Application.getApi().loginWithToken().enqueue(new Callback<LoginResponse>() {
-//                @Override
-//                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-//                    handleSuccessAuthResponse(response);
-//                }
-//
-//                @Override
-//                public void onFailure(Call<LoginResponse> call, Throwable t) {
-//
-//                }
-//            });
+            Take365Application.setAccessToken(token);
+            Take365Application.getApi().loginWithToken(new LoginWithTokenRequest(token)).enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    handleSuccessAuthResponse(response);
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                    }
+            });
         }
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {

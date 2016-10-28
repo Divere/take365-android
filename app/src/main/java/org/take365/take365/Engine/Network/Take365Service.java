@@ -4,10 +4,12 @@
 
 package org.take365.take365.Engine.Network;
 
+import org.take365.take365.Engine.Network.Models.Request.LoginWithTokenRequest;
 import org.take365.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
 import org.take365.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -20,8 +22,8 @@ public interface Take365Service {
     @POST("auth/login")
     Call<LoginResponse> login(@Field("username") String username, @Field("password") String password);
 
-    @GET("auth/reuse-token")
-    Call<LoginResponse> loginWithToken();
+    @POST("auth/reuse-token")
+    Call<LoginResponse> loginWithToken(@Body LoginWithTokenRequest request);
 
     @GET("story/list")
     Call<StoryListResponse> storyList(@Query("username") String username);

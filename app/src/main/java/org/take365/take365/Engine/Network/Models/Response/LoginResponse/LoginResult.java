@@ -5,6 +5,6 @@ package org.take365.take365.Engine.Network.Models.Response.LoginResponse;
  */
 public class LoginResult {
     public String token;
-    public long tokenExpires;
+    public String tokenExpires;
     public String username;
 }
