@@ -5,9 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.squareup.picasso.Picasso;
+
 import org.take365.Models.StoryDay;
 import org.take365.Views.StoryCalendarView;
-import org.take365.Views.StoryItemView;
 
 import java.util.List;
 
@@ -46,13 +47,17 @@ public class StorySectionAdapter extends BaseAdapter {
         StoryDay item = (StoryDay) this.getItem(position);
 
         if(convertView == null) {
-            //if(item.image == null) {
-                convertView = new StoryCalendarView(context);
-            //}
+            convertView = new StoryCalendarView(context);
         }
 
-        StoryItemView view = (StoryItemView)convertView;
+        StoryCalendarView view = (StoryCalendarView)convertView;
         view.setDay(item);
+
+        if(item.image != null) {
+            Picasso.with(context).load(item.image.thumb.url).into(view.imageView);
+        } else {
+            view.imageView.setImageResource(android.R.color.transparent);
+        }
 
         return convertView;
     }
