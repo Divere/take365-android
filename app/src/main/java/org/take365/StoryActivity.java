@@ -164,6 +164,6 @@ public class StoryActivity extends AppCompatActivity {
             }
         });
 
-        lvSections.setAdapter(new StoryAdapter(sections, sortedSectionsTitles));
+        lvSections.setAdapter(new StoryAdapter(this, sections, sortedSectionsTitles));
     }
 }

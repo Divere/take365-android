@@ -2,6 +2,7 @@ package org.take365.Views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -31,7 +32,7 @@ public class StoryListView extends FrameLayout {
 
     public StoryListView(final Context context) {
         super(context);
-        addView(View.inflate(context, R.layout.view_storylist, null));
+        LayoutInflater.from(context).inflate(R.layout.view_storylist, this);
 
         lvStories = (ListView)findViewById(R.id.lvStories);
 
