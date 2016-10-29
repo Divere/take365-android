@@ -2,6 +2,7 @@ package org.take365;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -87,6 +88,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        switch (id) {
+            case R.id.nav_exit:
+                PreferenceManager.getDefaultSharedPreferences(this).edit().remove("access_token").apply();
+                Intent intent = new Intent(this, AuthenticationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+        }
 
 //        if (id == R.id.nav_camera) {
 //            // Handle the camera action

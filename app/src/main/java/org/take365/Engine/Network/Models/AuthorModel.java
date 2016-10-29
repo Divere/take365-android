@@ -9,6 +9,6 @@ public class AuthorModel implements Serializable {
     public int id;
     public String url;
     public String username;
-    public String userpic;
-    public String userpicLarge;
+    public StoryImageThumbModel userpic;
+    public StoryImageThumbModel userpicLarge;
 }
