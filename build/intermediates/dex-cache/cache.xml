@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="08d504b24ef99fdcb99f19649e8259e3531aa30e">
+        sha1="c61a5461b93c68fa6bbd5b87ec8cea6abd41f7f0">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ea88623eec148fe9b97f3483a8c47606edbb3162/classes.dex" />
     </item>
     <item
