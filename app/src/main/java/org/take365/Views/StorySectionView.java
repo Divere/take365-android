@@ -3,8 +3,10 @@ package org.take365.Views;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.TextView;
 
+import org.take365.Adapters.StorySectionAdapter;
 import org.take365.Models.StoryDay;
 import org.take365.R;
 
@@ -27,6 +29,7 @@ public class StorySectionView extends FrameLayout {
     private TextView tvMonth;
     private TextView tvSeparator;
     private TextView tvYear;
+    private GridView gvDays;
 
     public StorySectionView(Context context) {
         super(context);
@@ -35,6 +38,7 @@ public class StorySectionView extends FrameLayout {
         tvMonth = (TextView) findViewById(R.id.tvMonth);
         tvSeparator = (TextView) findViewById(R.id.tvSeparator);
         tvYear = (TextView) findViewById(R.id.tvYear);
+        gvDays = (GridView) findViewById(R.id.gvDays);
     }
 
     public void setTitle(String title) {
@@ -58,5 +62,6 @@ public class StorySectionView extends FrameLayout {
 
     public void setDays(List<StoryDay> days) {
         this.days = days;
+        gvDays.setAdapter(new StorySectionAdapter(getContext(), days));
     }
 }

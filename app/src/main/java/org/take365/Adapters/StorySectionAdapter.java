@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import org.take365.Models.StoryDay;
+import org.take365.Views.StoryCalendarView;
+import org.take365.Views.StoryItemView;
 
 import java.util.List;
 
@@ -44,8 +46,13 @@ public class StorySectionAdapter extends BaseAdapter {
         StoryDay item = (StoryDay) this.getItem(position);
 
         if(convertView == null) {
-
+            //if(item.image == null) {
+                convertView = new StoryCalendarView(context);
+            //}
         }
+
+        StoryItemView view = (StoryItemView)convertView;
+        view.setDay(item);
 
         return convertView;
     }
