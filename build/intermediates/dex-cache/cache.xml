@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="1cdac8c7d0f1b191322f3e4bbf60d68ebe291705">
+        sha1="08d504b24ef99fdcb99f19649e8259e3531aa30e">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ea88623eec148fe9b97f3483a8c47606edbb3162/classes.dex" />
     </item>
     <item
@@ -205,7 +205,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="747a51cadedcf170b9330b06325cd318255cdf55">
+        sha1="a7080e39d79d0d7dde1f0ce0c33ed4a76deaee74">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_692ec412559aaaca15089f55d05c2d734557b0ed/classes.dex" />
     </item>
     <item
