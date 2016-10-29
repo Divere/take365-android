@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
+import org.take365.Adapters.StoryAdapter;
 import org.take365.Engine.Network.Models.AuthorModel;
 import org.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailResponse;
 import org.take365.Engine.Network.Models.StoryDetailsModel;
@@ -163,6 +164,6 @@ public class StoryActivity extends AppCompatActivity {
             }
         });
 
-
+        lvSections.setAdapter(new StoryAdapter(sections, sortedSectionsTitles));
     }
 }

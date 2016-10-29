@@ -1,5 +1,6 @@
 package org.take365.Adapters;
 
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -32,7 +33,7 @@ public class StoryAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         String key = sortedSectionsTitles.get(position);
-        return sections.get(key);
+        return new Pair<>(key, sections.get(key));
     }
 
     @Override
@@ -42,6 +43,12 @@ public class StoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        Pair<String, List<StoryDay>> item = (Pair<String, List<StoryDay>>) this.getItem(position);
+
+        if(convertView == null){
+
+        }
+
+        return convertView;
     }
 }
