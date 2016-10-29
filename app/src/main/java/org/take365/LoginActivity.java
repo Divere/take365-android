@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Take365Application.getApi().login(tfLogin.getText().toString(), tfPassword.getText().toString()).enqueue(new Callback<LoginResponse>() {
+                Take365App.getApi().login(tfLogin.getText().toString(), tfPassword.getText().toString()).enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         AuthenticationHelper.handleSuccessAuthResponse(LoginActivity.this, response);

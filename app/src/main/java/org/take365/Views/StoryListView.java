@@ -12,7 +12,7 @@ import org.take365.Engine.Network.Models.Response.StoryResponse.StoryListRespons
 import org.take365.Engine.Network.Models.StoryListItemModel;
 import org.take365.R;
 import org.take365.StoryActivity;
-import org.take365.Take365Application;
+import org.take365.Take365App;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class StoryListView extends FrameLayout {
             }
         });
 
-        Take365Application.getApi().storyList(Take365Application.getCurrentUser().username).enqueue(new Callback<StoryListResponse>() {
+        Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username).enqueue(new Callback<StoryListResponse>() {
             @Override
             public void onResponse(Call<StoryListResponse> call, Response<StoryListResponse> response) {
                 lvStories.setAdapter(new StoryListAdapter(context, response.body().result));

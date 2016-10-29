@@ -20,9 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 
-public class Take365Application extends Application {
+public class Take365App extends Application {
 
-    private static Take365Application application;
+    private static Take365App application;
 
     private static final String API_URI = "https://take365.org/api/";
 
