@@ -6,12 +6,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.GridView;
 
 import org.take365.Engine.Network.Models.StoryListItemModel;
 
 public class StoryActivity extends AppCompatActivity {
 
     private StoryListItemModel currentStory;
+
+    private GridView gvDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class StoryActivity extends AppCompatActivity {
 
         setTitle(currentStory.title);
 
+        gvDays = (GridView) findViewById(R.id.gvDays);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
