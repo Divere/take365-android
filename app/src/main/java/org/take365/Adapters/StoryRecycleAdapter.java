@@ -11,6 +11,8 @@ import org.take365.Views.StoryDayView;
 import org.take365.Views.StorySectionView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by divere on 30/10/2016.
@@ -45,9 +47,15 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private ArrayList items;
 
-    public StoryRecycleAdapter(Context context, ArrayList items) {
+    public StoryRecycleAdapter(Context context, TreeMap<String, List<StoryDay>> sections) {
         this.context = context;
-        this.items = items;
+
+        this.items = new ArrayList();
+
+        for (String sectionTitle : sections.keySet()) {
+            items.add(sectionTitle);
+            items.addAll(sections.get(sectionTitle));
+        }
     }
 
     @Override
