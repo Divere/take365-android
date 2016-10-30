@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "org.take365.take365"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -23,8 +23,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

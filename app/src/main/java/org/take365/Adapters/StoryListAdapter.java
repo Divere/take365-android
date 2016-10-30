@@ -29,7 +29,7 @@ public class StoryListAdapter extends ArrayAdapter<StoryListItemModel> {
         StoryListItemModel item = this.getItem(position);
 
         if(convertView == null) {
-            convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.view_storylistitem, parent, false);
+            convertView = LayoutInflater.from(this.getContext()).inflate(R.layout.view_storylist_item, parent, false);
         }
 
         TextView tvStoryName = (TextView) convertView.findViewById(R.id.tvStoryName);

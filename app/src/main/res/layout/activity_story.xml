@@ -29,12 +29,13 @@
         tools:context="org.take365.StoryActivity"
         tools:showIn="@layout/activity_story">
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/gvDays"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/lvSections" />
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

@@ -4,16 +4,20 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ListView;
 
-import org.take365.Adapters.StoryAdapter;
+import org.take365.Adapters.StoryRecycleAdapter;
 import org.take365.Engine.Network.Models.AuthorModel;
 import org.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailResponse;
 import org.take365.Engine.Network.Models.StoryDetailsModel;
 import org.take365.Engine.Network.Models.StoryImageImagesModel;
 import org.take365.Engine.Network.Models.StoryListItemModel;
+import org.take365.Helpers.DpToPixelsConverter;
+import org.take365.Components.GridAutofitLayoutManager;
+import org.take365.Components.SpacesItemDecoration;
 import org.take365.Models.StoryDay;
 
 import java.text.ParseException;
@@ -40,8 +44,9 @@ public class StoryActivity extends AppCompatActivity {
     private List<StoryDay> days;
     private HashMap<String, List<StoryDay>> sections;
     private List<String> sortedSectionsTitles;
+    private ArrayList items;
 
-    private ListView lvSections;
+    private RecyclerView gvDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class StoryActivity extends AppCompatActivity {
         currentStory = (StoryListItemModel) getIntent().getSerializableExtra("story");
         setTitle(currentStory.title);
 
-        lvSections = (ListView) findViewById(R.id.lvSections);
+        gvDays = (RecyclerView) findViewById(R.id.gvDays);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,6 +71,7 @@ public class StoryActivity extends AppCompatActivity {
         imagesByDays = new HashMap<>();
         days = new ArrayList<>();
         sections = new HashMap<>();
+        items = new ArrayList();
 
         Take365App.getApi().getStoryDetails(currentStory.id).enqueue(new Callback<StoryDetailResponse>() {
             @Override
@@ -164,6 +170,23 @@ public class StoryActivity extends AppCompatActivity {
             }
         });
 
-        lvSections.setAdapter(new StoryAdapter(this, sections, sortedSectionsTitles));
+        for (String sectionTitle : sortedSectionsTitles) {
+            items.add(sectionTitle);
+            items.addAll(sections.get(sectionTitle));
+        }
+
+        final StoryRecycleAdapter storyRecycleAdapter = new StoryRecycleAdapter(this, items);
+
+        final GridAutofitLayoutManager gridLayoutManager = new GridAutofitLayoutManager(this, DpToPixelsConverter.toPixels(100));
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return storyRecycleAdapter.getItemViewType(position) == StoryRecycleAdapter.ElementsType.VIEW_HEADER ? gridLayoutManager.spanCount : 1;
+            }
+        });
+
+        gvDays.setLayoutManager(gridLayoutManager);
+        gvDays.addItemDecoration(new SpacesItemDecoration(DpToPixelsConverter.toPixels(10)));
+        gvDays.setAdapter(storyRecycleAdapter);
     }
 }

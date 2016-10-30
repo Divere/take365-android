@@ -11,6 +11,33 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.0_d59f5101dd6ed84d4c1f9eb0e76f33d078547027.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_00ff839176d8dbf510f67a9821e03ce33e1aefae/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.1.0/2de7cd8b95b7021b1d597f049bcb422055119f2c/retrofit-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.1.0_b17cc082b38baa111cdbb5efe109dda26fde792e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_4995489979331e9733bf397656eaff477873e784/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.1.0/aa557d71ead91cbf26e0c316a0f593d168303309/converter-gson-2.1.0.jar"
         jumboMode="false"
@@ -18,6 +45,15 @@
         revision="23.0.2"
         sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/converter-gson-2.1.0_40f45f316126d71307e0cec7902a724233ebdab2.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_19c77af940f7e92b5a0e6cd6f808d796fc7e6877/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -29,6 +65,24 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.0_1658961465adf5439f2ab31e2f6befb07811651f.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_5f49170a3ebea2a990a42122f3d93ff506620893/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="37d6d3733170b86483f3e202a3305a056c655094">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ea88623eec148fe9b97f3483a8c47606edbb3162/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/libs/internal_impl-25.0.0.jar"
         jumboMode="false"
@@ -36,6 +90,15 @@
         revision="23.0.2"
         sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_fa6ef0fb1919945eb7d84e190239c9b42114ef7c.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_16d9ea9c31443d93e3995af13f7093e78acc2f73/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -92,6 +155,24 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.0_4a0e2cf4991cec600c33eca40edc4d5b9bbc93b8.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_ba11163282457764f94860c2fafa24295f9cfaed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_61168f25a750e9a67cd8b3db9ca8e52e85751686/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
         jumboMode="false"
@@ -99,6 +180,15 @@
         revision="23.0.2"
         sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_cb95eb680951f94874f279876de3fe5a09aa8d1f.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_2d30a5985803037dbcb572b72bc5564b99d6623b/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -128,6 +218,24 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.9_d90bf6a8905f6da3948d9e73c3c518a5ea345cd4.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7b4d4a1f01e766348f9951ce8e0e30dc99db0cf4">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_692ec412559aaaca15089f55d05c2d734557b0ed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_98257fd55d259e8731a00fe1e44b82bfe723aa3e/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.0/jars/classes.jar"
         jumboMode="false"
@@ -135,6 +243,24 @@
         revision="23.0.2"
         sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.0.0_63d7647af236a743480329c73b9ceb971deda6c5.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_17b5ae0005f5ba24311ba77863ef4af7fbab7cf1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.1.0/aa557d71ead91cbf26e0c316a0f593d168303309/converter-gson-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/converter-gson-2.1.0_40f45f316126d71307e0cec7902a724233ebdab2/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -173,6 +299,33 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_17cb041d0719c70ac2e3c1eba9590bc20abd0a56.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_cbcdac0285f056d60dcc1a7350dbcb60a85588a9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_29daf6c401e1eb02760996120fe3564ceb5aa936/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_97a61ddab7d0f18b2ea15eabc02df8d6470bc284/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/jars/classes.jar"
         jumboMode="false"
@@ -191,6 +344,15 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_12873300aa48914a9e25c0c26b9486ad263546cc.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_554a8662439edb0f78a3bc191a679b70fc855528/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
         jumboMode="false"
@@ -200,6 +362,51 @@
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_d4bb33491c72e5155eab3dbea7b7da5ee5281e9a.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_1924ccd8ac89306ee692517a77d8c8cbdc4d21e6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.7_30d5771abc47ffe04846961164ac3457e6d525e6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/cz.msebera.android/httpclient/4.3.6/526a9f794eab830eae4f23a62c572878b3f491ab/httpclient-4.3.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/httpclient-4.3.6_8796f1ff39d4aa0a6cfa470e654e0084d63ed15c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_43d852331aca847513e94e4323f11688f26a84c7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/386a4339ffe52d5d63e80f9bed8d2b1d1a418249/android-async-http-1.4.9.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/android-async-http-1.4.9_d90bf6a8905f6da3948d9e73c3c518a5ea345cd4/classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.0/jars/classes.jar"
         jumboMode="false"
@@ -207,6 +414,15 @@
         revision="23.0.2"
         sha1="5e497d60f0cb6ce87c458ac5420a46d0fed49bd0">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.0.0_4d93ca63f1f54ebc7555c6d2598f603e6e7a2479.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_3d0e7e54adbdac0324646854a6f82ed43c8ab0e1/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -234,6 +450,33 @@
         revision="23.0.2"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_61168f25a750e9a67cd8b3db9ca8e52e85751686.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.8.0_76cd945f7a87c4bc778721078a1ded5882047a80/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.0/2b802460eea20f8f2ad9c08c74e0f14718e88aa9/okhttp-3.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.3.0_a00b0cc8689a86ab7d629db4995b8699b8aee34f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_505b832e079f27109d5060190a8242b82160415f/classes.dex" />
     </item>
 
 </items>

@@ -13,7 +13,7 @@ import org.take365.R;
  * Created by divere on 29/10/2016.
  */
 
-public class StoryCalendarView extends FrameLayout {
+public class StoryDayView extends FrameLayout {
 
     public StoryDay day;
 
@@ -21,9 +21,9 @@ public class StoryCalendarView extends FrameLayout {
 
     public ImageView imageView;
 
-    public StoryCalendarView(Context context) {
+    public StoryDayView(Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.view_story_calendar_day, this);
+        LayoutInflater.from(context).inflate(R.layout.view_story_day, this);
         tvDay = (TextView) findViewById(R.id.tvDay);
         imageView = (ImageView) findViewById(R.id.imageView);
     }
