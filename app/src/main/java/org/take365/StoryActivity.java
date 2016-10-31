@@ -1,6 +1,7 @@
 package org.take365;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import org.take365.Engine.Network.Models.StoryDetailsModel;
 import org.take365.Engine.Network.Models.StoryImageImagesModel;
 import org.take365.Engine.Network.Models.StoryListItemModel;
 import org.take365.Helpers.BitmapToBytesConverter;
+import org.take365.Helpers.DialogHelpers;
 import org.take365.Helpers.DpToPixelsConverter;
 import org.take365.Models.StoryDay;
 import org.take365.Views.StoryDayView;
@@ -59,6 +61,7 @@ public class StoryActivity extends AppCompatActivity {
     private RecyclerView gvDays;
     private StoryRecycleAdapter storyRecycleAdapter;
 
+    private String todayString;
     private String selectedDate;
 
     @Override
@@ -74,16 +77,32 @@ public class StoryActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+            private void captureImage()
+            {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, CAMERA_REQUEST);
                 }
             }
+
+            @Override
+            public void onClick(View view) {
+                if(imagesByDays.get(todayString) != null) {
+                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            captureImage();
+                        }
+                    });
+                    return;
+                }
+
+                captureImage();
+            }
         });
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        todayString = df.format(new Date());
 
         refreshStoryInfo();
     }
@@ -238,13 +257,32 @@ public class StoryActivity extends AppCompatActivity {
 
         if (storyRecycleAdapter == null) {
             storyRecycleAdapter = new StoryRecycleAdapter(this, sections, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectedDate = ((StoryDayView) v).day.day; // TODO: 31/10/2016 find a way how pass this value via Intent extra
+
+                public void captureImage()
+                {
+                     // TODO: 31/10/2016 find a way how pass this value via Intent extra
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                }
+
+                @Override
+                public void onClick(View v) {
+                    StoryDay day = ((StoryDayView) v).day;
+                    selectedDate = day.day;
+
+                    if(day.image != null) {
+                        DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                captureImage();
+                            }
+                        });
+                        return;
+                    }
+
+                    captureImage();
                 }
             });
 
