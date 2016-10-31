@@ -2,6 +2,7 @@ package org.take365.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
@@ -25,10 +26,10 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public static final int VIEW_NORMAL = 1;
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        public StorySectionView headerView;
+    private class HeaderViewHolder extends RecyclerView.ViewHolder {
+        StorySectionView headerView;
 
-        public HeaderViewHolder(StorySectionView v) {
+        HeaderViewHolder(StorySectionView v) {
             super(v);
             headerView = v;
         }
@@ -36,9 +37,9 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private class ViewHolder extends RecyclerView.ViewHolder {
 
-        public StoryDayView dayView;
+        StoryDayView dayView;
 
-        public ViewHolder(StoryDayView v) {
+        ViewHolder(StoryDayView v) {
             super(v);
             dayView = v;
         }
@@ -46,12 +47,17 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private Context context;
     private ArrayList items;
+    private View.OnClickListener onClickListener;
 
-    public StoryRecycleAdapter(Context context, TreeMap<String, List<StoryDay>> sections) {
+    public StoryRecycleAdapter(Context context, TreeMap<String, List<StoryDay>> sections, View.OnClickListener onClickListener) {
         this.context = context;
+        this.onClickListener = onClickListener;
 
+        setSections(sections);
+    }
+
+    public void setSections(TreeMap<String, List<StoryDay>> sections) {
         this.items = new ArrayList();
-
         for (String sectionTitle : sections.keySet()) {
             items.add(sectionTitle);
             items.addAll(sections.get(sectionTitle));
@@ -100,6 +106,10 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Picasso.with(context).load(item.image.thumb.url).into(view.imageView);
             } else {
                 view.imageView.setImageResource(android.R.color.transparent);
+            }
+
+            if(onClickListener != null) {
+                view.setOnClickListener(onClickListener);
             }
         }
     }

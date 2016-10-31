@@ -1,8 +1,12 @@
 package org.take365;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +15,20 @@ import android.view.View;
 
 import org.take365.Adapters.StoryRecycleAdapter;
 import org.take365.Components.GridAutofitLayoutManager;
+import org.take365.Components.ImageUploader;
 import org.take365.Components.SpacesItemDecoration;
 import org.take365.Engine.Network.Models.AuthorModel;
+import org.take365.Engine.Network.Models.Response.BaseResponse;
 import org.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailResponse;
 import org.take365.Engine.Network.Models.StoryDetailsModel;
 import org.take365.Engine.Network.Models.StoryImageImagesModel;
 import org.take365.Engine.Network.Models.StoryListItemModel;
+import org.take365.Helpers.BitmapToBytesConverter;
 import org.take365.Helpers.DpToPixelsConverter;
 import org.take365.Models.StoryDay;
+import org.take365.Views.StoryDayView;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +45,9 @@ import retrofit2.Response;
 
 public class StoryActivity extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int PICK_IMAGE = 1889;
+
     private StoryListItemModel currentStory;
     private StoryDetailsModel storyInfo;
     private boolean isContributingStory;
@@ -45,6 +57,9 @@ public class StoryActivity extends AppCompatActivity {
     private TreeMap<String, List<StoryDay>> sections;
 
     private RecyclerView gvDays;
+    private StoryRecycleAdapter storyRecycleAdapter;
+
+    private String selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +76,87 @@ public class StoryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, CAMERA_REQUEST);
+                }
             }
         });
 
+        refreshStoryInfo();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        switch (requestCode) {
+            case CAMERA_REQUEST: {
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                byte[] imageBytes = BitmapToBytesConverter.convert(photo);
+
+                ImageUploader.uploadImage(currentStory.id, imageBytes, null, new Callback<BaseResponse>() {
+                    @Override
+                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        refreshStoryInfo();
+                    }
+
+                    @Override
+                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+
+                    }
+                });
+            }
+            break;
+            case PICK_IMAGE: {
+                Uri imageUri = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    byte[] imageBytes = BitmapToBytesConverter.convert(bitmap);
+
+                    ImageUploader.uploadImage(currentStory.id, imageBytes, selectedDate, new Callback<BaseResponse>() {
+                        @Override
+                        public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                            refreshStoryInfo();
+                        }
+
+                        @Override
+                        public void onFailure(Call<BaseResponse> call, Throwable t) {
+
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            break;
+        }
+    }
+
+    private void refreshStoryInfo() {
+        Take365App.getApi().getStoryDetails(currentStory.id).enqueue(new Callback<StoryDetailResponse>() {
+            @Override
+            public void onResponse(Call<StoryDetailResponse> call, Response<StoryDetailResponse> response) {
+                storyInfo = response.body().result;
+                try {
+                    renderStoryInfo();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoryDetailResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void renderStoryInfo() throws ParseException {
         imagesByDays = new HashMap<>();
         days = new ArrayList<>();
         sections = new TreeMap<>(new Comparator<String>() {
@@ -93,25 +184,6 @@ public class StoryActivity extends AppCompatActivity {
             }
         });
 
-        Take365App.getApi().getStoryDetails(currentStory.id).enqueue(new Callback<StoryDetailResponse>() {
-            @Override
-            public void onResponse(Call<StoryDetailResponse> call, Response<StoryDetailResponse> response) {
-                storyInfo = response.body().result;
-                try {
-                    loadStoryInfo();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<StoryDetailResponse> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void loadStoryInfo() throws ParseException {
         for (AuthorModel author : storyInfo.authors) {
             if (author.id == Take365App.getCurrentUser().id) {
                 isContributingStory = true;
@@ -164,18 +236,32 @@ public class StoryActivity extends AppCompatActivity {
             sectionContent.add(storyDay);
         }
 
-        final StoryRecycleAdapter storyRecycleAdapter = new StoryRecycleAdapter(this, sections);
+        if (storyRecycleAdapter == null) {
+            storyRecycleAdapter = new StoryRecycleAdapter(this, sections, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedDate = ((StoryDayView) v).day.day; // TODO: 31/10/2016 find a way how pass this value via Intent extra
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+                }
+            });
 
-        final GridAutofitLayoutManager gridLayoutManager = new GridAutofitLayoutManager(this, DpToPixelsConverter.toPixels(110));
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return storyRecycleAdapter.getItemViewType(position) == StoryRecycleAdapter.ElementsType.VIEW_HEADER ? gridLayoutManager.spanCount : 1;
-            }
-        });
+            final GridAutofitLayoutManager gridLayoutManager = new GridAutofitLayoutManager(this, DpToPixelsConverter.toPixels(110));
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    return storyRecycleAdapter.getItemViewType(position) == StoryRecycleAdapter.ElementsType.VIEW_HEADER ? gridLayoutManager.spanCount : 1;
+                }
+            });
 
-        gvDays.setLayoutManager(gridLayoutManager);
-        gvDays.addItemDecoration(new SpacesItemDecoration(DpToPixelsConverter.toPixels(10)));
-        gvDays.setAdapter(storyRecycleAdapter);
+            gvDays.setLayoutManager(gridLayoutManager);
+            gvDays.addItemDecoration(new SpacesItemDecoration(DpToPixelsConverter.toPixels(10)));
+            gvDays.setAdapter(storyRecycleAdapter);
+        } else {
+            storyRecycleAdapter.setSections(sections);
+            storyRecycleAdapter.notifyDataSetChanged();
+        }
     }
 }
