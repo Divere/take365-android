@@ -77,8 +77,7 @@ public class StoryActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            private void captureImage()
-            {
+            private void captureImage() {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, CAMERA_REQUEST);
@@ -87,7 +86,7 @@ public class StoryActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if(imagesByDays.get(todayString) != null) {
+                if (imagesByDays.get(todayString) != null) {
                     DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -255,51 +254,51 @@ public class StoryActivity extends AppCompatActivity {
             sectionContent.add(storyDay);
         }
 
-        if (storyRecycleAdapter == null) {
-            storyRecycleAdapter = new StoryRecycleAdapter(this, sections, new View.OnClickListener() {
-
-                public void captureImage()
-                {
-                     // TODO: 31/10/2016 find a way how pass this value via Intent extra
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-                }
-
-                @Override
-                public void onClick(View v) {
-                    StoryDay day = ((StoryDayView) v).day;
-                    selectedDate = day.day;
-
-                    if(day.image != null) {
-                        DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                captureImage();
-                            }
-                        });
-                        return;
-                    }
-
-                    captureImage();
-                }
-            });
-
-            final GridAutofitLayoutManager gridLayoutManager = new GridAutofitLayoutManager(this, DpToPixelsConverter.toPixels(110));
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    return storyRecycleAdapter.getItemViewType(position) == StoryRecycleAdapter.ElementsType.VIEW_HEADER ? gridLayoutManager.spanCount : 1;
-                }
-            });
-
-            gvDays.setLayoutManager(gridLayoutManager);
-            gvDays.addItemDecoration(new SpacesItemDecoration(DpToPixelsConverter.toPixels(10)));
-            gvDays.setAdapter(storyRecycleAdapter);
-        } else {
+        if (storyRecycleAdapter != null) {
             storyRecycleAdapter.setSections(sections);
             storyRecycleAdapter.notifyDataSetChanged();
+            return;
         }
+
+        storyRecycleAdapter = new StoryRecycleAdapter(this, sections, new View.OnClickListener() {
+
+            void captureImage() {
+                // TODO: 31/10/2016 find a way how pass this value via Intent extra
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+            }
+
+            @Override
+            public void onClick(View v) {
+                StoryDay day = ((StoryDayView) v).day;
+                selectedDate = day.day;
+
+                if (day.image != null) {
+                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            captureImage();
+                        }
+                    });
+                    return;
+                }
+
+                captureImage();
+            }
+        });
+
+        final GridAutofitLayoutManager gridLayoutManager = new GridAutofitLayoutManager(this, DpToPixelsConverter.toPixels(110));
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return storyRecycleAdapter.getItemViewType(position) == StoryRecycleAdapter.ElementsType.VIEW_HEADER ? gridLayoutManager.spanCount : 1;
+            }
+        });
+
+        gvDays.setLayoutManager(gridLayoutManager);
+        gvDays.addItemDecoration(new SpacesItemDecoration(DpToPixelsConverter.toPixels(10)));
+        gvDays.setAdapter(storyRecycleAdapter);
     }
 }
