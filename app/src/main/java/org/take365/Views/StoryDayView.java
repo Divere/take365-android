@@ -1,7 +1,6 @@
 package org.take365.Views;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -37,7 +36,7 @@ public class StoryDayView extends FrameLayout {
     }
 
     public void setUploadProgress(int percentage) {
-        Log.d("take365", "Progress " + percentage);
+        day.uploadProgress = percentage;
         if(uploadProgressBar.getVisibility() == INVISIBLE) {
             uploadProgressBar.setVisibility(VISIBLE);
         }

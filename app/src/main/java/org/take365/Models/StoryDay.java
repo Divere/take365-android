@@ -8,6 +8,6 @@ import org.take365.Engine.Network.Models.StoryImageImagesModel;
 
 public class StoryDay {
     public String day;
-    public float uploadProgress;
+    public int uploadProgress;
     public StoryImageImagesModel image;
 }
