@@ -12,6 +12,7 @@ import org.take365.Views.StoryDayView;
 import org.take365.Views.StorySectionView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -48,6 +49,7 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private ArrayList items;
     private View.OnClickListener onClickListener;
+    private HashMap<String, StoryDayView> visibleViews;
 
     public StoryRecycleAdapter(Context context, TreeMap<String, List<StoryDay>> sections, View.OnClickListener onClickListener) {
         this.context = context;
@@ -61,6 +63,13 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         for (String sectionTitle : sections.keySet()) {
             items.add(sectionTitle);
             items.addAll(sections.get(sectionTitle));
+        }
+    }
+
+    public void setUploadProgress(String selectedDate, int percentage) {
+        StoryDayView visibleDay = visibleViews.get(selectedDate);
+        if(visibleDay != null) {
+            visibleDay.setUploadProgress(percentage);
         }
     }
 
@@ -111,6 +120,25 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(onClickListener != null) {
                 view.setOnClickListener(onClickListener);
             }
+        }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if(holder instanceof ViewHolder) {
+            if(this.visibleViews == null) {
+                this.visibleViews = new HashMap<>();
+            }
+            visibleViews.put(((ViewHolder) holder).dayView.day.day, ((ViewHolder) holder).dayView);
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        if(holder instanceof ViewHolder) {
+            visibleViews.remove(((ViewHolder) holder).dayView.day.day);
         }
     }
 

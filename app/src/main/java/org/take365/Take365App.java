@@ -12,7 +12,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -61,9 +60,9 @@ public class Take365App extends Application {
             }
         });
 
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClient.addInterceptor(logging);
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        httpClient.addInterceptor(logging);
 
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(API_URI).addConverterFactory(GsonConverterFactory.create());
         service = builder.client(httpClient.build()).build().create(Take365Service.class);

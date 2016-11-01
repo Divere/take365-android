@@ -1,13 +1,17 @@
 package org.take365;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +21,7 @@ import android.view.View;
 import org.take365.Adapters.StoryRecycleAdapter;
 import org.take365.Components.GridAutofitLayoutManager;
 import org.take365.Components.ImageUploader;
+import org.take365.Components.ProgressRequestBody;
 import org.take365.Components.SpacesItemDecoration;
 import org.take365.Engine.Network.Models.AuthorModel;
 import org.take365.Engine.Network.Models.Response.BaseResponse;
@@ -24,13 +29,12 @@ import org.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailRespo
 import org.take365.Engine.Network.Models.StoryDetailsModel;
 import org.take365.Engine.Network.Models.StoryImageImagesModel;
 import org.take365.Engine.Network.Models.StoryListItemModel;
-import org.take365.Helpers.BitmapToBytesConverter;
 import org.take365.Helpers.DialogHelpers;
 import org.take365.Helpers.DpToPixelsConverter;
 import org.take365.Models.StoryDay;
 import org.take365.Views.StoryDayView;
 
-import java.io.IOException;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +53,12 @@ public class StoryActivity extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int PICK_IMAGE = 1889;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
 
     private StoryListItemModel currentStory;
     private StoryDetailsModel storyInfo;
@@ -64,6 +74,8 @@ public class StoryActivity extends AppCompatActivity {
     private String todayString;
     private String selectedDate;
 
+    private String pictureImagePath = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +90,17 @@ public class StoryActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             private void captureImage() {
+
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String imageFileName = timeStamp + ".jpg";
+                File storageDir = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES);
+                pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+                File file = new File(pictureImagePath);
+                Uri outputFileUri = FileProvider.getUriForFile(StoryActivity.this, StoryActivity.this.getApplicationContext().getPackageName() + ".provider", file);
+
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, CAMERA_REQUEST);
                 }
@@ -104,6 +126,16 @@ public class StoryActivity extends AppCompatActivity {
         todayString = df.format(new Date());
 
         refreshStoryInfo();
+
+        int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
     }
 
     @Override
@@ -112,47 +144,57 @@ public class StoryActivity extends AppCompatActivity {
             return;
         }
 
+        ProgressRequestBody.UploadCallbacks progressCallback = new ProgressRequestBody.UploadCallbacks() {
+            @Override
+            public void onProgressUpdate(int percentage) {
+                storyRecycleAdapter.setUploadProgress(selectedDate, percentage);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+
+        Callback<BaseResponse> resultCallback = new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                refreshStoryInfo();
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+
+            }
+        };
+
+        File imgFile = null;
+
         switch (requestCode) {
             case CAMERA_REQUEST: {
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                byte[] imageBytes = BitmapToBytesConverter.convert(photo);
-
-                ImageUploader.uploadImage(currentStory.id, imageBytes, null, new Callback<BaseResponse>() {
-                    @Override
-                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                        refreshStoryInfo();
-                    }
-
-                    @Override
-                    public void onFailure(Call<BaseResponse> call, Throwable t) {
-
-                    }
-                });
+                imgFile = new File(pictureImagePath);
+                if (!imgFile.exists()) {
+                    return;
+                }
+                selectedDate = todayString;
             }
             break;
             case PICK_IMAGE: {
-                Uri imageUri = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                    byte[] imageBytes = BitmapToBytesConverter.convert(bitmap);
-
-                    ImageUploader.uploadImage(currentStory.id, imageBytes, selectedDate, new Callback<BaseResponse>() {
-                        @Override
-                        public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                            refreshStoryInfo();
-                        }
-
-                        @Override
-                        public void onFailure(Call<BaseResponse> call, Throwable t) {
-
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                imgFile = new File(data.getData().getPath());
             }
             break;
         }
+
+        if(imgFile == null){
+            return;
+        }
+
+        ImageUploader.uploadImage(currentStory.id, imgFile, selectedDate, progressCallback, resultCallback);
     }
 
     private void refreshStoryInfo() {
@@ -223,7 +265,7 @@ public class StoryActivity extends AppCompatActivity {
         calendar.setTime(dateStart);
 
         for (int i = 0; i < storyInfo.progress.passedDays + 1; i++) {
-            calendar.add(Calendar.HOUR, 24);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
             Date currentDate = calendar.getTime();
             if (currentDate.compareTo(dateEnd) > 0 || currentDate.compareTo(today) > 0) {
                 break;

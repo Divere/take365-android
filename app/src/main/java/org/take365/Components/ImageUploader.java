@@ -3,6 +3,7 @@ package org.take365.Components;
 import org.take365.Engine.Network.Models.Response.BaseResponse;
 import org.take365.Take365App;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,14 +18,14 @@ import retrofit2.Callback;
 
 public class ImageUploader {
 
-    public static void uploadImage(int storyId, byte[] imageData, String date, Callback<BaseResponse> callback) {
+    public static void uploadImage(int storyId, File image, String date, ProgressRequestBody.UploadCallbacks progress, Callback<BaseResponse> result) {
         if(date == null) {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date today = new Date();
             date = df.format(today);
         }
 
-        RequestBody file = RequestBody.create(MediaType.parse("multipart/form-data"), imageData);
+        ProgressRequestBody file = new ProgressRequestBody(image, progress);
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", "image.jpg", file);
 
         RequestBody imageName = RequestBody.create(MediaType.parse("multipart/form-data"), "image.jpg");
@@ -33,7 +34,7 @@ public class ImageUploader {
         RequestBody mediaType = RequestBody.create(MediaType.parse("multipart/form-data"), "storyImage");
         RequestBody dateFormatted = RequestBody.create(MediaType.parse("multipart/form-data"), date);
 
-        Take365App.getApi().uploadPhoto(imageName, storyIdFormatted, targetType, mediaType, dateFormatted, filePart).enqueue(callback);
+        Take365App.getApi().uploadPhoto(imageName, storyIdFormatted, targetType, mediaType, dateFormatted, filePart).enqueue(result);
     }
 
 }
