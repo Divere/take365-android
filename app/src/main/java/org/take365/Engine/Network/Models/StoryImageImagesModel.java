@@ -1,9 +1,11 @@
 package org.take365.Engine.Network.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by evgeniy on 08.02.16.
  */
-public class StoryImageImagesModel {
+public class StoryImageImagesModel implements Serializable {
     public int id;
     public String title;
     public String description;

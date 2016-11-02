@@ -196,7 +196,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="eb05b1280224874417b07c8b3893bcc7ea5e59d0">
+        sha1="35cf54a6d6d8b1283a2a85f05448f34ee99f03ed">
         <dex dex="/Users/divere/Workspace/take365/take365-android/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_ea88623eec148fe9b97f3483a8c47606edbb3162.jar" />
     </item>
     <item

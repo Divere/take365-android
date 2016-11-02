@@ -326,12 +326,16 @@ public class StoryActivity extends AppCompatActivity {
                 selectedDate = day.day;
 
                 if (day.image != null) {
-                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            captureImage();
-                        }
-                    });
+//                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            captureImage();
+//                        }
+//                    });
+                    Intent playerIntent = new Intent(StoryActivity.this, PhotoPlayerActivity.class);
+                    playerIntent.putExtra("currentItem", day);
+                    playerIntent.putExtra("items", (ArrayList<StoryDay>) days);
+                    startActivity(playerIntent);
                     return;
                 }
 
