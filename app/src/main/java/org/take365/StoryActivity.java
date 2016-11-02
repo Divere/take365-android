@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,6 +36,8 @@ import org.take365.Models.StoryDay;
 import org.take365.Views.StoryDayView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,6 +104,13 @@ public class StoryActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+                List<ResolveInfo> resInfoList = StoryActivity.this.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                for (ResolveInfo resolveInfo : resInfoList) {
+                    String packageName = resolveInfo.activityInfo.packageName;
+                    StoryActivity.this.grantUriPermission(packageName, outputFileUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
+
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(intent, CAMERA_REQUEST);
                 }
@@ -173,28 +183,26 @@ public class StoryActivity extends AppCompatActivity {
             }
         };
 
-        File imgFile = null;
-
         switch (requestCode) {
             case CAMERA_REQUEST: {
-                imgFile = new File(pictureImagePath);
+                File imgFile = new File(pictureImagePath);
                 if (!imgFile.exists()) {
                     return;
                 }
                 selectedDate = todayString;
+                ImageUploader.uploadImage(currentStory.id, imgFile, selectedDate, progressCallback, resultCallback);
             }
             break;
             case PICK_IMAGE: {
-                imgFile = new File(data.getData().getPath());
+                try {
+                    InputStream inputStream = StoryActivity.this.getContentResolver().openInputStream(data.getData());
+                    ImageUploader.uploadImage(currentStory.id, inputStream, selectedDate, progressCallback, resultCallback);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             break;
         }
-
-        if(imgFile == null){
-            return;
-        }
-
-        ImageUploader.uploadImage(currentStory.id, imgFile, selectedDate, progressCallback, resultCallback);
     }
 
     private void refreshStoryInfo() {

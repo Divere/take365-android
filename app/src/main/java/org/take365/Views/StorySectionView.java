@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import org.take365.Helpers.DateHelpers;
 import org.take365.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by divere on 29/10/2016.
@@ -50,6 +50,6 @@ public class StorySectionView extends FrameLayout {
 
         tvYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
         tvSeparator.setText(",");
-        tvMonth.setText(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ROOT));
+        tvMonth.setText(DateHelpers.getMonthDate(calendar.get(Calendar.MONTH)));
     }
 }

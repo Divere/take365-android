@@ -32,11 +32,12 @@ public class StoryDayView extends FrameLayout {
 
     public void setDay(StoryDay day) {
         this.day = day;
+        this.uploadProgressBar.setVisibility(INVISIBLE);
+        this.uploadProgressBar.setProgress(0);
         tvDay.setText(String.valueOf(day.day.split("-")[2]));
     }
 
     public void setUploadProgress(int percentage) {
-        day.uploadProgress = percentage;
         if(uploadProgressBar.getVisibility() == INVISIBLE) {
             uploadProgressBar.setVisibility(VISIBLE);
         }

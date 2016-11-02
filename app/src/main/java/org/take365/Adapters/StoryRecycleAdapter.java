@@ -117,10 +117,6 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 view.imageView.setImageResource(android.R.color.transparent);
             }
 
-            if(item.uploadProgress != 0) {
-                view.setUploadProgress(item.uploadProgress);
-            }
-
             if(onClickListener != null) {
                 view.setOnClickListener(onClickListener);
             }
