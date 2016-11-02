@@ -40,6 +40,7 @@ public class PhotoPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_player);
+        setTitle("Take365");
 
         currentItem = (StoryDay) getIntent().getSerializableExtra("currentItem");
         ArrayList<StoryDay> allItems = (ArrayList<StoryDay>) getIntent().getSerializableExtra("items");
