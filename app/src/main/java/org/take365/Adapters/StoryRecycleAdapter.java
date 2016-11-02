@@ -49,11 +49,13 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private ArrayList items;
     private View.OnClickListener onClickListener;
+    private View.OnLongClickListener onLongClickListener;
     private HashMap<String, StoryDayView> visibleViews;
 
-    public StoryRecycleAdapter(Context context, TreeMap<String, List<StoryDay>> sections, View.OnClickListener onClickListener) {
+    public StoryRecycleAdapter(Context context, TreeMap<String, List<StoryDay>> sections, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener) {
         this.context = context;
         this.onClickListener = onClickListener;
+        this.onLongClickListener = onLongClickListener;
 
         setSections(sections);
     }
@@ -119,6 +121,10 @@ public class StoryRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             if(onClickListener != null) {
                 view.setOnClickListener(onClickListener);
+            }
+
+            if(onLongClickListener != null) {
+                view.setOnLongClickListener(onLongClickListener);
             }
         }
     }

@@ -310,15 +310,8 @@ public class StoryActivity extends AppCompatActivity {
             return;
         }
 
-        storyRecycleAdapter = new StoryRecycleAdapter(this, sections, new View.OnClickListener() {
 
-            void captureImage() {
-                // TODO: 31/10/2016 find a way how pass this value via Intent extra
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-            }
+        storyRecycleAdapter = new StoryRecycleAdapter(this, sections, new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -326,12 +319,6 @@ public class StoryActivity extends AppCompatActivity {
                 selectedDate = day.day;
 
                 if (day.image != null) {
-//                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            captureImage();
-//                        }
-//                    });
                     Intent playerIntent = new Intent(StoryActivity.this, PhotoPlayerActivity.class);
                     playerIntent.putExtra("currentItem", day);
                     playerIntent.putExtra("items", (ArrayList<StoryDay>) days);
@@ -340,6 +327,23 @@ public class StoryActivity extends AppCompatActivity {
                 }
 
                 captureImage();
+            }
+        }, new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                StoryDay day = ((StoryDayView) v).day;
+                selectedDate = day.day;
+
+                if (day.image != null) {
+                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            captureImage();
+                        }
+                    });
+                }
+
+                return true;
             }
         });
 
@@ -354,5 +358,13 @@ public class StoryActivity extends AppCompatActivity {
         gvDays.setLayoutManager(gridLayoutManager);
         gvDays.addItemDecoration(new SpacesItemDecoration(DpToPixelsConverter.toPixels(10)));
         gvDays.setAdapter(storyRecycleAdapter);
+    }
+
+    private void captureImage() {
+        // TODO: 31/10/2016 find a way how pass this value via Intent extra
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 }
