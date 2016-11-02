@@ -91,6 +91,10 @@ public class StoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        if(currentStory.progress.isOutdated) {
+            fab.setVisibility(View.GONE);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             private void captureImage() {
 
@@ -328,7 +332,7 @@ public class StoryActivity extends AppCompatActivity {
 
                 captureImage();
             }
-        }, new View.OnLongClickListener() {
+        }, (!currentStory.progress.isOutdated) ? new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 StoryDay day = ((StoryDayView) v).day;
@@ -345,7 +349,7 @@ public class StoryActivity extends AppCompatActivity {
 
                 return true;
             }
-        });
+        } : null);
 
         final GridAutofitLayoutManager gridLayoutManager = new GridAutofitLayoutManager(this, DpToPixelsConverter.toPixels(110));
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -361,6 +365,9 @@ public class StoryActivity extends AppCompatActivity {
     }
 
     private void captureImage() {
+        if(currentStory.progress.isOutdated){
+            return;
+        }
         // TODO: 31/10/2016 find a way how pass this value via Intent extra
         Intent intent = new Intent();
         intent.setType("image/*");
