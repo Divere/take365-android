@@ -41,10 +41,38 @@
                 android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
                 android:layout_marginLeft="25dp" android:layout_marginRight="25dp" android:layout_marginTop="10dp"
                 android:hint="пароль" android:gravity="center_horizontal"/>
-        <Button
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="войти"
-                android:id="@+id/btnSignIn" android:layout_below="@+id/tfPassword" android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" android:layout_marginRight="25dp" android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tfPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp">
+
+                <Button
+                    android:text="регистрация"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnRegister"
+                    android:elevation="0dp"
+                    android:layout_alignBaseline="@+id/btnSignIn"
+                    android:layout_alignBottom="@+id/btnSignIn"
+                    android:layout_alignLeft="@+id/tfPassword"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="войти"
+                    android:id="@+id/btnSignIn"
+                    android:layout_below="@+id/tfPassword"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_weight="1" />
+
+        </LinearLayout>
+
 </RelativeLayout>

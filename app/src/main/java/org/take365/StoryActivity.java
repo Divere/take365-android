@@ -276,6 +276,14 @@ public class StoryActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateStart);
 
+        StoryDay firstDay = new StoryDay();
+        firstDay.day = df.format(calendar.getTime());
+        firstDay.image = imagesByDays.get(firstDay.day);
+
+        if (firstDay.image != null && isContributingStory) {
+            days.add(0, firstDay);
+        }
+
         for (int i = 0; i < storyInfo.progress.passedDays + 1; i++) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
             Date currentDate = calendar.getTime();

@@ -1,5 +1,6 @@
 package org.take365;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText tfLogin = (EditText) findViewById(R.id.tfLogin);
         final EditText tfPassword = (EditText) findViewById(R.id.tfPassword);
         Button btnSignIn = (Button) findViewById(R.id.btnSignIn);
+        Button btnRegister = (Button) findViewById(R.id.btnRegister);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
     }

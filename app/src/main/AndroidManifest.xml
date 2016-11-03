@@ -10,6 +10,11 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".Take365App"
         android:allowBackup="true"
@@ -52,7 +57,9 @@
         <activity
             android:name=".PhotoPlayerActivity"
             android:label="@string/title_activity_photo_player"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegistrationActivity" />
     </application>
 
 </manifest>

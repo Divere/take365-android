@@ -26,6 +26,10 @@ import retrofit2.http.Query;
 public interface Take365Service {
 
     @FormUrlEncoded
+    @POST("user/register")
+    Call<BaseResponse> register(@Field("username") String username, @Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
     @POST("auth/login")
     Call<LoginResponse> login(@Field("username") String username, @Field("password") String password);
 
@@ -37,6 +41,10 @@ public interface Take365Service {
 
     @GET("story/{id}")
     Call<StoryDetailResponse> getStoryDetails(@Path("id") int storyId);
+
+    @FormUrlEncoded
+    @POST("story/write")
+    Call<BaseResponse> createStory(@Field("status") int status, @Field("title") String title, @Field("description") String description);
 
     @Multipart
     @POST("media/upload")

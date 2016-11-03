@@ -21,4 +21,9 @@ public class DialogHelpers {
         builder.setMessage(question).setPositiveButton("Продолжить", positiveClickListener)
                 .setNegativeButton("Отмена", negativeClickListener).show();
     }
+
+    public static void AlertDialog(Context context, String message, DialogInterface.OnClickListener continueCallback) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message).setPositiveButton("Продолжить", continueCallback).show();
+    }
 }
