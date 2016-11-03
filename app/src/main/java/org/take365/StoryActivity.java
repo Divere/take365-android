@@ -280,7 +280,7 @@ public class StoryActivity extends AppCompatActivity {
         firstDay.day = df.format(calendar.getTime());
         firstDay.image = imagesByDays.get(firstDay.day);
 
-        if (firstDay.image != null && isContributingStory) {
+        if (isContributingStory) {
             days.add(0, firstDay);
         }
 
