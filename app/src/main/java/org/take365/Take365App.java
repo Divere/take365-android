@@ -70,6 +70,10 @@ public class Take365App extends Application {
         return service;
     }
 
+    public static void clearAccessToken() {
+        service = null;
+    }
+
     public static Take365Service setCurrentUser(final LoginResult result)
     {
         currentUser = result;

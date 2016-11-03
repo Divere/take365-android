@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.nav_exit:
                 PreferenceManager.getDefaultSharedPreferences(this).edit().remove("access_token").apply();
+                Take365App.clearAccessToken();
                 Intent intent = new Intent(this, AuthenticationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
