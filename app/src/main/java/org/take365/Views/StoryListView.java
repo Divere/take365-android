@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.take365.Adapters.StoryListAdapter;
 import org.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
 import org.take365.Engine.Network.Models.StoryListItemModel;
+import org.take365.Helpers.ApiErrorHelper;
 import org.take365.R;
 import org.take365.StoryActivity;
 import org.take365.Take365App;
@@ -34,6 +36,8 @@ public class StoryListView extends FrameLayout {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.view_storylist, this);
 
+        final TextView tvNoStories = (TextView) findViewById(R.id.tvNoStories);
+
         lvStories = (ListView)findViewById(R.id.lvStories);
 
         lvStories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -49,8 +53,16 @@ public class StoryListView extends FrameLayout {
         Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username).enqueue(new Callback<StoryListResponse>() {
             @Override
             public void onResponse(Call<StoryListResponse> call, Response<StoryListResponse> response) {
-                lvStories.setAdapter(new StoryListAdapter(context, response.body().result));
+                if(!response.isSuccessful()) {
+                    ApiErrorHelper.handleApiError(getContext(), response);
+                    return;
+                }
+
                 stories = response.body().result;
+                if(stories.size() == 0) {
+                    tvNoStories.setVisibility(VISIBLE);
+                }
+                lvStories.setAdapter(new StoryListAdapter(context, stories));
             }
 
             @Override

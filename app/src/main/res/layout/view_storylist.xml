@@ -2,8 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:text="У вас пока нет историй."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNoStories"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lvStories" />
+        android:id="@+id/lvStories"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 </RelativeLayout>
