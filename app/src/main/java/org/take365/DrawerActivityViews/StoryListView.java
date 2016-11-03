@@ -1,4 +1,4 @@
-package org.take365.Views;
+package org.take365.DrawerActivityViews;
 
 import android.content.Context;
 import android.content.Intent;
