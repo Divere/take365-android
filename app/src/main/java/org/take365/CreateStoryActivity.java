@@ -29,10 +29,12 @@ public class CreateStoryActivity extends Take365Activity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showProgressDialog("создаём историю...");
                 int status = swPrivacy.isChecked() ? 0 : 1;
                 Take365App.getApi().createStory(status, etStoryName.getText().toString(), etDescription.getText().toString()).enqueue(new Callback<BaseResponse>() {
                     @Override
                     public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        hideProgressDialog();
                         if(!response.isSuccessful()) {
                             showApiError(response);
                             return;
@@ -43,6 +45,7 @@ public class CreateStoryActivity extends Take365Activity {
 
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        hideProgressDialog();
                         showConnectionError();
                     }
                 });

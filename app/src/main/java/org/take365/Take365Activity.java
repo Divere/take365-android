@@ -1,6 +1,7 @@
 package org.take365;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,6 +18,8 @@ import retrofit2.Response;
  */
 
 public class Take365Activity extends AppCompatActivity {
+
+    private ProgressDialog progressDialog;
 
     public void showAskDialog(String question, DialogInterface.OnClickListener positiveClickListener) {
         showAskDialog(question, positiveClickListener, null);
@@ -44,5 +47,15 @@ public class Take365Activity extends AppCompatActivity {
 
     public void showConnectionError() {
         showAlertDialog("Не удалось установить соединение с сервером. Попробуйте позднее.", null);
+    }
+
+    public void showProgressDialog(String message) {
+        progressDialog = ProgressDialog.show(this, null, message, true, false);
+    }
+
+    public void hideProgressDialog(){
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
     }
 }

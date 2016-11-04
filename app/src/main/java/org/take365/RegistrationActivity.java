@@ -28,9 +28,11 @@ public class RegistrationActivity extends Take365AuthActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showProgressDialog("регистрируем...");
                 Take365App.getApi().register(etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()).enqueue(new Callback<BaseResponse>() {
                     @Override
                     public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                        hideProgressDialog();
                         if (!response.isSuccessful()) {
                             showApiError(response);
                             return;
@@ -46,6 +48,7 @@ public class RegistrationActivity extends Take365AuthActivity {
 
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
+                        hideProgressDialog();
                         showConnectionError();
                     }
                 });

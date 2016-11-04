@@ -17,9 +17,11 @@ import retrofit2.Response;
 public class Take365AuthActivity extends Take365Activity {
 
     protected void loginWithCredentials(String userName, String password) {
+        showProgressDialog("входим...");
         Take365App.getApi().login(userName, password).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                hideProgressDialog();
                 if (!response.isSuccessful()) {
                     showApiError(response);
                     return;
@@ -30,6 +32,7 @@ public class Take365AuthActivity extends Take365Activity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                hideProgressDialog();
                 showConnectionError();
             }
         });
