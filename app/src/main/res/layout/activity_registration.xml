@@ -34,7 +34,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etUsername"
-            android:hint="Имя пользователя"
+            android:hint="@string/user_name"
             />
 
         <EditText
@@ -44,7 +44,7 @@
             android:ems="10"
             android:id="@+id/etEmail"
             android:layout_marginTop="10dp"
-            android:hint="E-mail"/>
+            android:hint="@string/e_mail"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -53,10 +53,10 @@
             android:ems="10"
             android:id="@+id/etPassword"
             android:layout_marginTop="10dp"
-            android:hint="Пароль"/>
+            android:hint="@string/Password"/>
 
         <Button
-            android:text="Продолжить"
+            android:text="@string/_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnContinue" />

@@ -86,4 +86,3 @@ public class Take365App extends Application {
         return currentUser;
     }
 }
-;

@@ -23,7 +23,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etStoryName"
-            android:hint="Название истории"
+            android:hint="@string/enter_story_name"
             />
 
         <EditText
@@ -33,20 +33,20 @@
             android:ems="10"
             android:id="@+id/etDescription"
             android:layout_marginTop="10dp"
-            android:hint="Краткое описание истории"/>
+            android:hint="@string/enter_story_description"/>
 
 
         <Switch
-            android:text="Публичная история "
+            android:text="@string/public_story"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:id="@+id/swPrivacy"
             android:layout_weight="1"
             android:checked="true"
             android:layout_marginTop="10dp" android:layout_gravity="right" />
 
         <Button
-            android:text="Продолжить"
+            android:text="@string/_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

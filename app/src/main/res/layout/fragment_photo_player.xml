@@ -45,7 +45,7 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="1"
+            android:text="@string/_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvDay"
@@ -55,7 +55,7 @@
             android:textColor="@android:color/white" />
 
         <TextView
-            android:text="month"
+            android:text="@string/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvMonth"
@@ -64,17 +64,16 @@
             android:textColor="@color/colorAccent" />
 
         <TextView
-            android:text="TextView"
+            android:text="@string/date_separator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvSeparator"
             android:layout_weight="1"
-            tools:text=","
             android:textSize="24sp"
             android:textColor="@android:color/white" />
 
         <TextView
-            android:text="1900"
+            android:text="@string/_1900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvYear"

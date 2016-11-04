@@ -5,14 +5,14 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Мои истории" />
+            android:title="@string/my_stories" />
         <!--<item-->
             <!--android:id="@+id/nav_manage"-->
             <!--android:icon="@drawable/ic_menu_manage"-->
             <!--android:title="Настройки" />-->
         <item
             android:id="@+id/nav_exit"
-            android:title="Выход" />
+            android:title="@string/exit" />
     </group>
 
     <!--<item android:title="Communicate">-->
