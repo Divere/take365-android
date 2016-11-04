@@ -2,20 +2,18 @@ package org.take365;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
 import org.take365.Engine.Network.Models.Response.BaseResponse;
-import org.take365.Helpers.ApiErrorHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateStoryActivity extends AppCompatActivity {
+public class CreateStoryActivity extends Take365Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class CreateStoryActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                         if(!response.isSuccessful()) {
-                            ApiErrorHelper.handleApiError(CreateStoryActivity.this, response);
+                            showApiError(response);
                             return;
                         }
 
@@ -45,7 +43,7 @@ public class CreateStoryActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
-
+                        showConnectionError();
                     }
                 });
             }

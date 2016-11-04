@@ -13,7 +13,6 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +29,6 @@ import org.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailRespo
 import org.take365.Engine.Network.Models.StoryDetailsModel;
 import org.take365.Engine.Network.Models.StoryImageImagesModel;
 import org.take365.Engine.Network.Models.StoryListItemModel;
-import org.take365.Helpers.DialogHelpers;
 import org.take365.Helpers.DpToPixelsConverter;
 import org.take365.Models.StoryDay;
 import org.take365.Views.StoryDayView;
@@ -52,7 +50,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StoryActivity extends AppCompatActivity {
+public class StoryActivity extends Take365Activity {
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int PICK_IMAGE = 1889;
@@ -123,7 +121,7 @@ public class StoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (imagesByDays.get(todayString) != null) {
-                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+                    showAskDialog("Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             captureImage();
@@ -178,12 +176,16 @@ public class StoryActivity extends AppCompatActivity {
         Callback<BaseResponse> resultCallback = new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if(!response.isSuccessful()) {
+                    showApiError(response);
+                }
+
                 refreshStoryInfo();
             }
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-
+                showConnectionError();
             }
         };
 
@@ -223,7 +225,7 @@ public class StoryActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<StoryDetailResponse> call, Throwable t) {
-
+                showConnectionError();
             }
         });
     }
@@ -347,7 +349,7 @@ public class StoryActivity extends AppCompatActivity {
                 selectedDate = day.day;
 
                 if (day.image != null) {
-                    DialogHelpers.AskDialog(StoryActivity.this, "Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
+                    showAskDialog("Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             captureImage();

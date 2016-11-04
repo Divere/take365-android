@@ -11,6 +11,8 @@ public class StoryImageImagesModel implements Serializable {
     public String description;
     public StoryImageThumbModel thumb;
     public StoryImageThumbModel thumbLarge;
+    public StoryImageThumbModel image;
+    public StoryImageThumbModel imageLarge;
     public String date;
     public long timestamp;
     public long likesCount;

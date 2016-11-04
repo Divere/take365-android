@@ -12,9 +12,9 @@ import android.widget.TextView;
 import org.take365.Adapters.StoryListAdapter;
 import org.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
 import org.take365.Engine.Network.Models.StoryListItemModel;
-import org.take365.Helpers.ApiErrorHelper;
 import org.take365.R;
 import org.take365.StoryActivity;
+import org.take365.Take365Activity;
 import org.take365.Take365App;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class StoryListView extends FrameLayout {
             @Override
             public void onResponse(Call<StoryListResponse> call, Response<StoryListResponse> response) {
                 if(!response.isSuccessful()) {
-                    ApiErrorHelper.handleApiError(getContext(), response);
+                    ((Take365Activity)context).showApiError(response);
                     return;
                 }
 
@@ -67,7 +67,7 @@ public class StoryListView extends FrameLayout {
 
             @Override
             public void onFailure(Call<StoryListResponse> call, Throwable t) {
-
+                ((Take365Activity)context).showConnectionError();
             }
         });
     }

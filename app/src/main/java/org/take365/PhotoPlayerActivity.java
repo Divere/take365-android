@@ -5,7 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import org.take365.Models.StoryDay;
 
 import java.util.ArrayList;
 
-public class PhotoPlayerActivity extends AppCompatActivity {
+public class PhotoPlayerActivity extends Take365Activity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

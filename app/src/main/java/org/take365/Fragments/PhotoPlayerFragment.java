@@ -73,7 +73,7 @@ public class PhotoPlayerFragment extends Fragment {
         tvMonth.setText(calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ru")));
 
         ImageView ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
-        Picasso.with(getContext()).load(day.image.thumbLarge.url).into(ivPhoto);
+        Picasso.with(getContext()).load(day.image.image.url).into(ivPhoto);
         return view;
     }
 }
