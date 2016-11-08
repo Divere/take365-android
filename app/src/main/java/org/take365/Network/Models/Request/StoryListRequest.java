@@ -1,4 +1,4 @@
-package org.take365.Engine.Network.Models.Request;
+package org.take365.Network.Models.Request;
 
 /**
  * Created by Ermakov-MAC on 12.02.16.

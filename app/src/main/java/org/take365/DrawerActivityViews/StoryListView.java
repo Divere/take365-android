@@ -10,8 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.take365.Adapters.StoryListAdapter;
-import org.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
-import org.take365.Engine.Network.Models.StoryListItemModel;
+import org.take365.Network.Models.Response.StoryResponse.StoryListResponse;
+import org.take365.Network.Models.StoryListItemModel;
 import org.take365.R;
 import org.take365.StoryActivity;
 import org.take365.Take365Activity;
@@ -31,12 +31,13 @@ public class StoryListView extends FrameLayout {
 
     ListView lvStories;
     List<StoryListItemModel> stories;
+    TextView tvNoStories;
 
     public StoryListView(final Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.view_storylist, this);
 
-        final TextView tvNoStories = (TextView) findViewById(R.id.tvNoStories);
+        tvNoStories = (TextView) findViewById(R.id.tvNoStories);
 
         lvStories = (ListView)findViewById(R.id.lvStories);
 
@@ -50,11 +51,15 @@ public class StoryListView extends FrameLayout {
             }
         });
 
+        updateStoryList();
+    }
+
+    public void updateStoryList() {
         Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username).enqueue(new Callback<StoryListResponse>() {
             @Override
             public void onResponse(Call<StoryListResponse> call, Response<StoryListResponse> response) {
                 if(!response.isSuccessful()) {
-                    ((Take365Activity)context).showApiError(response);
+                    ((Take365Activity)getContext()).showApiError(response);
                     return;
                 }
 
@@ -62,12 +67,12 @@ public class StoryListView extends FrameLayout {
                 if(stories.size() == 0) {
                     tvNoStories.setVisibility(VISIBLE);
                 }
-                lvStories.setAdapter(new StoryListAdapter(context, stories));
+                lvStories.setAdapter(new StoryListAdapter(getContext(), stories));
             }
 
             @Override
             public void onFailure(Call<StoryListResponse> call, Throwable t) {
-                ((Take365Activity)context).showConnectionError();
+                ((Take365Activity)getContext()).showConnectionError();
             }
         });
     }

@@ -1,4 +1,4 @@
-package org.take365.Engine.Network.Models;
+package org.take365.Network.Models;
 
 /**
  * Created by evgeniy on 08.02.16.

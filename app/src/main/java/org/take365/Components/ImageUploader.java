@@ -1,6 +1,6 @@
 package org.take365.Components;
 
-import org.take365.Engine.Network.Models.Response.BaseResponse;
+import org.take365.Network.Models.Response.BaseResponse;
 import org.take365.Take365App;
 
 import java.io.File;

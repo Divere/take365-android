@@ -1,4 +1,4 @@
-package org.take365.Engine.Network.Models;
+package org.take365.Network.Models;
 
 import java.util.List;
 

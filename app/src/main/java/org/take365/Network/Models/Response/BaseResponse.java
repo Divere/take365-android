@@ -1,6 +1,6 @@
-package org.take365.Engine.Network.Models.Response;
+package org.take365.Network.Models.Response;
 
-import org.take365.Engine.Network.Models.ErrorModel;
+import org.take365.Network.Models.ErrorModel;
 
 /**
  * Created by evgeniy on 08.02.16.

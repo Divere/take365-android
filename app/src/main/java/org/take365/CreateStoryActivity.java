@@ -7,7 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import org.take365.Engine.Network.Models.Response.BaseResponse;
+import org.take365.Network.Models.Response.BaseResponse;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +34,9 @@ public class CreateStoryActivity extends Take365Activity {
             public void onClick(View v) {
                 showProgressDialog("создаём историю...");
                 int status = swPrivacy.isChecked() ? 0 : 1;
-                Take365App.getApi().createStory(status, etStoryName.getText().toString(), etDescription.getText().toString()).enqueue(new Callback<BaseResponse>() {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                String todayString = df.format(new Date());
+                Take365App.getApi().createStory(todayString, status, etStoryName.getText().toString(), etDescription.getText().toString()).enqueue(new Callback<BaseResponse>() {
                     @Override
                     public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                         hideProgressDialog();

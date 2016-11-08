@@ -20,6 +20,8 @@ public class MainActivity extends Take365Activity implements NavigationView.OnNa
 
     private RelativeLayout viewsContainer;
 
+    private View currentView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,15 @@ public class MainActivity extends Take365Activity implements NavigationView.OnNa
         navigationView.setNavigationItemSelectedListener(this);
 
         setView(new StoryListView(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(currentView instanceof StoryListView) {
+            ((StoryListView) currentView).updateStoryList();
+        }
+
     }
 
     @Override
@@ -121,5 +132,6 @@ public class MainActivity extends Take365Activity implements NavigationView.OnNa
     {
         viewsContainer.removeAllViews();
         viewsContainer.addView(view);
+        currentView = view;
     }
 }

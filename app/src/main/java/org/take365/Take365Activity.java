@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
-import org.take365.Engine.Network.Models.Response.BaseResponse;
+import org.take365.Network.Models.Response.BaseResponse;
+import org.take365.Network.Models.Response.ErrorResponse;
 
 import java.io.IOException;
 
@@ -37,12 +39,41 @@ public class Take365Activity extends AppCompatActivity {
     }
 
     public void showApiError(Response response) {
+        String responseString = null;
+
         try {
-            BaseResponse errorResponse = new Gson().fromJson(response.errorBody().string(), BaseResponse.class);
-            showAlertDialog(errorResponse.errors[0].value, null);
+            responseString = response.errorBody().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if(responseString == null) {
+            Log.e("take365", "Failed get response string from response.");
+            return;
+        }
+
+        String errorMessage = null;
+        try {
+            BaseResponse errorResponse = new Gson().fromJson(responseString, BaseResponse.class);
+            errorMessage = errorResponse.errors[0].value;
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ErrorResponse errorResponse = new Gson().fromJson(responseString, ErrorResponse.class);
+            errorMessage = errorResponse.errors[0];
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(errorMessage != null) {
+            showAlertDialog(errorMessage, null);
+            return;
+        }
+
+        Log.e("take365", "Failed parse error from response");
     }
 
     public void showConnectionError() {

@@ -2,13 +2,13 @@
  * Created by divere on 30.09.16.
  */
 
-package org.take365.Engine.Network;
+package org.take365.Network;
 
-import org.take365.Engine.Network.Models.Request.LoginWithTokenRequest;
-import org.take365.Engine.Network.Models.Response.BaseResponse;
-import org.take365.Engine.Network.Models.Response.LoginResponse.LoginResponse;
-import org.take365.Engine.Network.Models.Response.StoryResponse.StoryDetailResponse;
-import org.take365.Engine.Network.Models.Response.StoryResponse.StoryListResponse;
+import org.take365.Network.Models.Request.LoginWithTokenRequest;
+import org.take365.Network.Models.Response.BaseResponse;
+import org.take365.Network.Models.Response.LoginResponse.LoginResponse;
+import org.take365.Network.Models.Response.StoryResponse.StoryDetailResponse;
+import org.take365.Network.Models.Response.StoryResponse.StoryListResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -44,7 +44,7 @@ public interface Take365Service {
 
     @FormUrlEncoded
     @POST("story/write")
-    Call<BaseResponse> createStory(@Field("status") int status, @Field("title") String title, @Field("description") String description);
+    Call<BaseResponse> createStory(@Field("startDate") String startDate, @Field("status") int status, @Field("title") String title, @Field("description") String description);
 
     @Multipart
     @POST("media/upload")

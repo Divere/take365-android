@@ -3,8 +3,8 @@ package org.take365;
 import android.app.Application;
 import android.content.Context;
 
-import org.take365.Engine.Network.Models.Response.LoginResponse.LoginResult;
-import org.take365.Engine.Network.Take365Service;
+import org.take365.Network.Models.Response.LoginResponse.LoginResult;
+import org.take365.Network.Take365Service;
 
 import java.io.IOException;
 

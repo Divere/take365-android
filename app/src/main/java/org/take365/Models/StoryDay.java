@@ -1,6 +1,6 @@
 package org.take365.Models;
 
-import org.take365.Engine.Network.Models.StoryImageImagesModel;
+import org.take365.Network.Models.StoryImageImagesModel;
 
 import java.io.Serializable;
 
