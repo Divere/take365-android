@@ -37,7 +37,7 @@ public interface Take365Service {
     Call<LoginResponse> loginWithToken(@Body LoginWithTokenRequest request);
 
     @GET("story/list")
-    Call<StoryListResponse> getStoriesList(@Query("username") String username);
+    Call<StoryListResponse> getStoriesList(@Query("username") String username, @Query("maxItems") int maxItems);
 
     @GET("story/{id}")
     Call<StoryDetailResponse> getStoryDetails(@Path("id") int storyId);

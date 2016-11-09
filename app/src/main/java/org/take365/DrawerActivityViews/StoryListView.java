@@ -2,6 +2,7 @@ package org.take365.DrawerActivityViews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import org.take365.StoryActivity;
 import org.take365.Take365Activity;
 import org.take365.Take365App;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,12 +52,10 @@ public class StoryListView extends FrameLayout {
                 context.startActivity(storyIntent);
             }
         });
-
-        updateStoryList();
     }
 
     public void updateStoryList() {
-        Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username).enqueue(new Callback<StoryListResponse>() {
+        Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username, 100).enqueue(new Callback<StoryListResponse>() {
             @Override
             public void onResponse(Call<StoryListResponse> call, Response<StoryListResponse> response) {
                 if(!response.isSuccessful()) {
