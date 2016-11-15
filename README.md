@@ -1,5 +1,3 @@
-# take365-android
-
 <img src="https://take365.org/i/logo.svg" width="200"><br>
 Android application for <a href="https://take365.org">take365.org</a> project.
 
