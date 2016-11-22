@@ -3,6 +3,8 @@ package org.take365;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -10,6 +12,7 @@ import com.google.gson.Gson;
 
 import org.take365.Network.Models.Response.BaseResponse;
 import org.take365.Network.Models.Response.ErrorResponse;
+import org.take365.Network.Models.Response.LoginResponse.LoginResult;
 
 import java.io.IOException;
 
@@ -22,6 +25,24 @@ import retrofit2.Response;
 public class Take365Activity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LoginResult currentUser = Take365App.getCurrentUser();
+        if (currentUser != null) {
+            outState.putSerializable("currentUser", Take365App.getCurrentUser());
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        LoginResult currentUser = (LoginResult) savedInstanceState.getSerializable("currentUser");
+        if (currentUser != null) {
+            Take365App.setCurrentUser(currentUser);
+        }
+    }
 
     public void showAskDialog(String question, DialogInterface.OnClickListener positiveClickListener) {
         showAskDialog(question, positiveClickListener, null);
@@ -47,7 +68,7 @@ public class Take365Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(responseString == null) {
+        if (responseString == null) {
             Log.e("take365", "Failed get response string from response.");
             return;
         }
@@ -56,7 +77,10 @@ public class Take365Activity extends AppCompatActivity {
         try {
             BaseResponse errorResponse = new Gson().fromJson(responseString, BaseResponse.class);
             errorMessage = errorResponse.errors[0].value;
-            return;
+            if (errorMessage != null) {
+                showAlertDialog(errorMessage, null);
+                return;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,14 +88,15 @@ public class Take365Activity extends AppCompatActivity {
         try {
             ErrorResponse errorResponse = new Gson().fromJson(responseString, ErrorResponse.class);
             errorMessage = errorResponse.errors[0];
-        }catch (Exception e) {
+            if (errorMessage != null) {
+                showAlertDialog(errorMessage, null);
+                return;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(errorMessage != null) {
-            showAlertDialog(errorMessage, null);
-            return;
-        }
+
 
         Log.e("take365", "Failed parse error from response");
     }
@@ -84,8 +109,8 @@ public class Take365Activity extends AppCompatActivity {
         progressDialog = ProgressDialog.show(this, null, message, true, false);
     }
 
-    public void hideProgressDialog(){
-        if(progressDialog != null){
+    public void hideProgressDialog() {
+        if (progressDialog != null) {
             progressDialog.cancel();
         }
     }

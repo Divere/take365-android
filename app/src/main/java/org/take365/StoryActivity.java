@@ -18,6 +18,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
+
 import org.take365.Adapters.StoryRecycleAdapter;
 import org.take365.Components.GridAutofitLayoutManager;
 import org.take365.Components.ImageUploader;
@@ -59,7 +61,6 @@ public class StoryActivity extends Take365Activity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-
 
     private StoryListItemModel currentStory;
     private StoryDetailsModel storyInfo;
@@ -120,7 +121,7 @@ public class StoryActivity extends Take365Activity {
 
             @Override
             public void onClick(View view) {
-                if (imagesByDays.get(todayString) != null) {
+                if (imagesByDays != null && imagesByDays.get(todayString) != null) {
                     showAskDialog("Данное действие заменит уже существующую фотографию", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -215,10 +216,16 @@ public class StoryActivity extends Take365Activity {
         Take365App.getApi().getStoryDetails(currentStory.id).enqueue(new Callback<StoryDetailResponse>() {
             @Override
             public void onResponse(Call<StoryDetailResponse> call, Response<StoryDetailResponse> response) {
+                if(!response.isSuccessful()) {
+                    showApiError(response);
+                    return;
+                }
+
                 storyInfo = response.body().result;
                 try {
                     renderStoryInfo();
                 } catch (ParseException e) {
+                    Crashlytics.logException(e);
                     e.printStackTrace();
                 }
             }
