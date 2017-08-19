@@ -53,7 +53,7 @@ public class Take365App extends Application {
         return service;
     }
 
-    public static Take365Service setAccessToken(final String token)
+    public static void setAccessToken(final String token)
     {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
@@ -64,25 +64,23 @@ public class Take365App extends Application {
             }
         });
 
-//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        httpClient.addInterceptor(logging);
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClient.addInterceptor(logging);
 
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(API_URI).addConverterFactory(GsonConverterFactory.create());
         service = builder.client(httpClient.build()).build().create(Take365Service.class);
 
-        return service;
     }
 
     public static void clearAccessToken() {
         service = null;
     }
 
-    public static Take365Service setCurrentUser(final LoginResult result)
+    public static void setCurrentUser(final LoginResult result)
     {
         currentUser = result;
-        setAccessToken(currentUser.token);
-        return service;
+        setAccessToken(currentUser.getToken());
     }
 
     public static LoginResult getCurrentUser()
