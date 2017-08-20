@@ -3,6 +3,7 @@ package org.take365
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -341,10 +342,15 @@ class StoryActivity : Take365Activity() {
     }
 
     companion object {
-
         private val CAMERA_REQUEST = 1888
         private val PICK_IMAGE = 1889
         private val REQUEST_EXTERNAL_STORAGE = 1
         private val PERMISSIONS_STORAGE = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        fun startActivity(context: Context, storyListItem: StoryListItem) {
+            val storyIntent = Intent(context, StoryActivity::class.java)
+            storyIntent.putExtra("story", storyListItem)
+            context.startActivity(storyIntent)
+        }
     }
 }

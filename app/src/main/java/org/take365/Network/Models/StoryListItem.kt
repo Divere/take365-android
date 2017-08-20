@@ -10,6 +10,6 @@ data class StoryListItem(
         var id: Int,
         var progress: StoryProgress,
         var status: Int,
-        var title: String? = null,
-        var url: String? = null
+        var title: String?,
+        var url: String?
 ) : Serializable

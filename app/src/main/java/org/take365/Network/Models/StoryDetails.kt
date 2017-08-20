@@ -1,5 +1,7 @@
 package org.take365.Network.Models
 
+import java.io.Serializable
+
 /**
  * Created by Ermakov-MAC on 18.02.16.
  */
@@ -11,4 +13,4 @@ data class StoryDetails(
         var status: Int,
         var title: String?,
         var url: String?
-)
+) : Serializable

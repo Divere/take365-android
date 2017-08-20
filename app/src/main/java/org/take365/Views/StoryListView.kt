@@ -1,4 +1,4 @@
-package org.take365.DrawerActivityViews
+package org.take365.Views
 
 import android.content.Context
 import android.content.Intent
@@ -30,10 +30,7 @@ class StoryListView(context: Context) : FrameLayout(context) {
         LayoutInflater.from(context).inflate(R.layout.view_storylist, this)
 
         lvStories.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            val selectedStory = stories!![position]
-            val storyIntent = Intent(context, StoryActivity::class.java)
-            storyIntent.putExtra("story", selectedStory)
-            context.startActivity(storyIntent)
+            StoryActivity.startActivity(context, stories!![position])
         }
     }
 

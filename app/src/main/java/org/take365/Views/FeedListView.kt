@@ -1,4 +1,4 @@
-package org.take365.DrawerActivityViews
+package org.take365.Views
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
