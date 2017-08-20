@@ -6,6 +6,10 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/my_stories" />
+        <item
+            android:id="@+id/nav_feed"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/feed" />
         <!--<item-->
             <!--android:id="@+id/nav_manage"-->
             <!--android:icon="@drawable/ic_menu_manage"-->

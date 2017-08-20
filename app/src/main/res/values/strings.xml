@@ -46,4 +46,6 @@
     <string name="_1">1</string>
     <string name="registration">регистрация</string>
     <string name="sign_in">войти</string>
+    <string name="feed">Лента</string>
+    <string name="empty_feed">Лента пуста.</string>
 </resources>

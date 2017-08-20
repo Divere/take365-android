@@ -8,8 +8,8 @@ import android.widget.AdapterView
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.view_storylist.view.*
 import org.take365.Adapters.StoryListAdapter
-import org.take365.Network.Models.Response.StoryResponse.StoryListResponse
-import org.take365.Network.Models.StoryListItemModel
+import org.take365.Network.Models.Response.StoryResponse.GetStoryListResponse
+import org.take365.Network.Models.StoryListItem
 import org.take365.R
 import org.take365.StoryActivity
 import org.take365.Take365Activity
@@ -24,7 +24,7 @@ import retrofit2.Response
 
 class StoryListView(context: Context) : FrameLayout(context) {
 
-    internal var stories: List<StoryListItemModel>? = null
+    internal var stories: List<StoryListItem>? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_storylist, this)
@@ -38,8 +38,8 @@ class StoryListView(context: Context) : FrameLayout(context) {
     }
 
     fun updateStoryList() {
-        Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username, 100).enqueue(object : Callback<StoryListResponse> {
-            override fun onResponse(call: Call<StoryListResponse>, response: Response<StoryListResponse>) {
+        Take365App.getApi().getStoriesList(Take365App.getCurrentUser().username, 100).enqueue(object : Callback<GetStoryListResponse> {
+            override fun onResponse(call: Call<GetStoryListResponse>, response: Response<GetStoryListResponse>) {
                 if (!response.isSuccessful) {
                     (context as Take365Activity).showApiError(response)
                     return
@@ -52,7 +52,7 @@ class StoryListView(context: Context) : FrameLayout(context) {
                 lvStories.adapter = StoryListAdapter(context, stories!!)
             }
 
-            override fun onFailure(call: Call<StoryListResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetStoryListResponse>, t: Throwable) {
                 (context as Take365Activity).showConnectionError()
             }
         })

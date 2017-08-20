@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-import org.take365.Network.Models.StoryListItemModel
+import org.take365.Network.Models.StoryListItem
 import org.take365.R
 
 /**
  * Created by divere on 26/10/2016.
  */
 
-class StoryListAdapter(context: Context, items: List<StoryListItemModel>) : ArrayAdapter<StoryListItemModel>(context, 0, items) {
+class StoryListAdapter(context: Context, items: List<StoryListItem>) : ArrayAdapter<StoryListItem>(context, 0, items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var convertView = convertView

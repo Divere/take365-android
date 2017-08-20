@@ -6,11 +6,12 @@ package org.take365.Network
 
 import org.take365.Network.Models.Response.BaseResponse
 import org.take365.Network.Models.Response.LoginResponse.LoginResponse
-import org.take365.Network.Models.Response.StoryResponse.StoryDetailResponse
-import org.take365.Network.Models.Response.StoryResponse.StoryListResponse
+import org.take365.Network.Models.Response.StoryResponse.GetStoryDetailsResponse
+import org.take365.Network.Models.Response.StoryResponse.GetStoryListResponse
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.take365.Network.Models.Response.FeedResponse.GetFeedResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -36,10 +37,10 @@ interface Take365Service {
     fun loginWithToken(@Field("accessToken") accessToken: String): Call<LoginResponse>
 
     @GET("story/list")
-    fun getStoriesList(@Query("username") username: String, @Query("maxItems") maxItems: Int): Call<StoryListResponse>
+    fun getStoriesList(@Query("username") username: String, @Query("maxItems") maxItems: Int): Call<GetStoryListResponse>
 
     @GET("story/{id}")
-    fun getStoryDetails(@Path("id") storyId: Int): Call<StoryDetailResponse>
+    fun getStoryDetails(@Path("id") storyId: Int): Call<GetStoryDetailsResponse>
 
     @FormUrlEncoded
     @POST("story/write")
@@ -55,4 +56,7 @@ interface Take365Service {
             @Part("date") date: RequestBody,
             @Part file: MultipartBody.Part
     ): Call<BaseResponse>
+
+    @GET("feed/feed")
+    fun getFeed(@Query("page") page: Int, @Query("maxItems") maxItems: Int) : Call<GetFeedResponse>
 }

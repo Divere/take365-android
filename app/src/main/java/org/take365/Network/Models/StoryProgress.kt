@@ -5,7 +5,7 @@ import java.io.Serializable
 /**
  * Created by evgeniy on 08.02.16.
  */
-data class StoryProgressModel(
+data class StoryProgress(
         var dateStart: String,
         var dateEnd: String,
         var percentsComplete: Double,

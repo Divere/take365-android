@@ -1,6 +1,6 @@
 package org.take365.Models
 
-import org.take365.Network.Models.StoryImageImagesModel
+import org.take365.Network.Models.StoryImage
 
 import java.io.Serializable
 
@@ -10,5 +10,5 @@ import java.io.Serializable
 
 class StoryDay : Serializable {
     lateinit var day: String
-    var image: StoryImageImagesModel? = null
+    var image: StoryImage? = null
 }

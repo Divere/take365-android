@@ -23,10 +23,10 @@ import org.take365.Components.SpacesItemDecoration
 import org.take365.Helpers.DpToPixelsConverter
 import org.take365.Models.StoryDay
 import org.take365.Network.Models.Response.BaseResponse
-import org.take365.Network.Models.Response.StoryResponse.StoryDetailResponse
-import org.take365.Network.Models.StoryDetailsModel
-import org.take365.Network.Models.StoryImageImagesModel
-import org.take365.Network.Models.StoryListItemModel
+import org.take365.Network.Models.Response.StoryResponse.GetStoryDetailsResponse
+import org.take365.Network.Models.StoryDetails
+import org.take365.Network.Models.StoryImage
+import org.take365.Network.Models.StoryListItem
 import org.take365.Views.StoryDayView
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,11 +39,11 @@ import java.util.*
 
 class StoryActivity : Take365Activity() {
 
-    private var currentStory: StoryListItemModel? = null
-    private var storyInfo: StoryDetailsModel? = null
+    private var currentStory: StoryListItem? = null
+    private var storyInfo: StoryDetails? = null
     private var isContributingStory: Boolean = false
 
-    private var imagesByDays: HashMap<String, StoryImageImagesModel>? = null
+    private var imagesByDays: HashMap<String, StoryImage>? = null
     private var days: MutableList<StoryDay>? = null
     private var sections: TreeMap<String, MutableList<StoryDay>>? = null
 
@@ -57,7 +57,7 @@ class StoryActivity : Take365Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story)
-        currentStory = intent.getSerializableExtra("story") as StoryListItemModel
+        currentStory = intent.getSerializableExtra("story") as StoryListItem
         title = currentStory!!.title
 
         setSupportActionBar(toolbar)
@@ -172,14 +172,14 @@ class StoryActivity : Take365Activity() {
     }
 
     private fun refreshStoryInfo() {
-        Take365App.getApi().getStoryDetails(currentStory!!.id).enqueue(object : Callback<StoryDetailResponse> {
-            override fun onResponse(call: Call<StoryDetailResponse>, response: Response<StoryDetailResponse>) {
-                if (!response.isSuccessful) {
-                    showApiError(response)
+        Take365App.getApi().getStoryDetails(currentStory!!.id).enqueue(object : Callback<GetStoryDetailsResponse> {
+            override fun onResponse(call: Call<GetStoryDetailsResponse>, responseGet: Response<GetStoryDetailsResponse>) {
+                if (!responseGet.isSuccessful) {
+                    showApiError(responseGet)
                     return
                 }
 
-                storyInfo = response.body().result
+                storyInfo = responseGet.body().result
                 try {
                     renderStoryInfo()
                 } catch (e: ParseException) {
@@ -189,7 +189,7 @@ class StoryActivity : Take365Activity() {
 
             }
 
-            override fun onFailure(call: Call<StoryDetailResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetStoryDetailsResponse>, t: Throwable) {
                 showConnectionError()
             }
         })

@@ -1,8 +1,8 @@
 package org.take365.Network.Models.Response.StoryResponse
 
 import org.take365.Network.Models.Response.BaseResponse
-import org.take365.Network.Models.StoryListItemModel
+import org.take365.Network.Models.StoryDetails
 
-data class StoryListResponse(
-        var result: List<StoryListItemModel>?
+data class GetStoryDetailsResponse(
+        var result: StoryDetails?
 ) : BaseResponse()
