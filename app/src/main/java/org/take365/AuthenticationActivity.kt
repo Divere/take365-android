@@ -3,7 +3,7 @@ package org.take365
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import org.take365.Network.models.responses.login.LoginResponse
+import org.take365.network.models.responses.login.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

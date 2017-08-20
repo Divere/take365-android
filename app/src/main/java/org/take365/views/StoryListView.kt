@@ -7,8 +7,8 @@ import android.widget.AdapterView
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.view_storylist.view.*
 import org.take365.adapters.StoryListAdapter
-import org.take365.Network.models.responses.story.GetStoryListResponse
-import org.take365.Network.models.StoryListItem
+import org.take365.network.models.responses.story.GetStoryListResponse
+import org.take365.network.models.StoryListItem
 import org.take365.R
 import org.take365.StoryActivity
 import org.take365.Take365Activity

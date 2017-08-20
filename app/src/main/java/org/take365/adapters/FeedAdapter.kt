@@ -3,7 +3,7 @@ package org.take365.adapters
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import org.take365.Network.models.FeedItem
+import org.take365.network.models.FeedItem
 import org.take365.views.FeedItemView
 
 /**
@@ -23,7 +23,6 @@ class FeedAdapter(val context: Context, val items: List<FeedItem>) : RecyclerVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        val view = FeedItemView(parent!!.context)
-        return FeedItemViewHolder(view)
+        return FeedItemViewHolder(FeedItemView(parent!!.context))
     }
 }

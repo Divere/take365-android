@@ -1,4 +1,4 @@
-package org.take365.Network.models.responses.login
+package org.take365.network.models.responses.login
 
 import java.io.Serializable
 

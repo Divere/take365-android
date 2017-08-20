@@ -2,16 +2,18 @@
  * Created by divere on 30.09.16.
  */
 
-package org.take365.Network
+package org.take365.network
 
-import org.take365.Network.models.responses.BaseResponse
-import org.take365.Network.models.responses.login.LoginResponse
-import org.take365.Network.models.responses.story.GetStoryDetailsResponse
-import org.take365.Network.models.responses.story.GetStoryListResponse
+import org.take365.network.models.responses.BaseResponse
+import org.take365.network.models.responses.login.LoginResponse
+import org.take365.network.models.responses.story.GetStoryDetailsResponse
+import org.take365.network.models.responses.story.GetStoryListResponse
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.take365.Network.models.responses.feed.GetFeedResponse
+import okhttp3.Response
+import okhttp3.ResponseBody
+import org.take365.network.models.responses.feed.GetFeedResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -59,4 +61,10 @@ interface Take365Service {
 
     @GET("feed/feed")
     fun getFeed(@Query("page") page: Int, @Query("maxItems") maxItems: Int) : Call<GetFeedResponse>
+
+    @POST("media/{id}/like")
+    fun like(@Path("id") mediaId: Int) : Call<ResponseBody>
+
+    @POST("media/{id}/unlike")
+    fun unlike(@Path("id") mediaId: Int) : Call<ResponseBody>
 }

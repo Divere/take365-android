@@ -9,9 +9,9 @@ import android.util.Log
 
 import com.google.gson.Gson
 
-import org.take365.Network.models.responses.BaseResponse
-import org.take365.Network.models.responses.ErrorResponse
-import org.take365.Network.models.responses.login.LoginResult
+import org.take365.network.models.responses.BaseResponse
+import org.take365.network.models.responses.ErrorResponse
+import org.take365.network.models.responses.login.LoginResult
 
 import java.io.IOException
 

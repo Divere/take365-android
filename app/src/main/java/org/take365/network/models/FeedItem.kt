@@ -1,20 +1,17 @@
-package org.take365.Network.models
-
-import java.io.Serializable
+package org.take365.network.models
 
 /**
- * Created by evgeniy on 08.02.16.
+ * Created by divere on 20/08/2017.
  */
-data class StoryImage(
+data class FeedItem(
         var id: Int,
         var title: String,
         var description: String?,
         var thumb: StoryImageThumb,
         var thumbLarge: StoryImageThumb,
-        var image: StoryImageThumb,
-        var imageLarge: StoryImageThumb,
+        var story: StoryListItem,
         var date: String,
         var timestamp: Long,
         var likesCount: Long,
         var isLiked: Boolean
-) : Serializable
+)

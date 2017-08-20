@@ -1,4 +1,4 @@
-package org.take365.Network.models
+package org.take365.network.models
 
 /**
  * Created by evgeniy on 08.02.16.

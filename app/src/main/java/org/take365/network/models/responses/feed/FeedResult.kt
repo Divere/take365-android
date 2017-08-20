@@ -1,6 +1,6 @@
-package org.take365.Network.models.responses.feed
+package org.take365.network.models.responses.feed
 
-import org.take365.Network.models.FeedItem
+import org.take365.network.models.FeedItem
 
 /**
  * Created by divere on 20/08/2017.

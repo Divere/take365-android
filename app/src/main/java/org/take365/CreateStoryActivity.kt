@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_create_story.*
 
-import org.take365.Network.models.responses.BaseResponse
+import org.take365.network.models.responses.BaseResponse
 
 import java.text.SimpleDateFormat
 import java.util.Date

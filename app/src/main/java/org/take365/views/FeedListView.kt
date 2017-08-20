@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.view_feed.view.*
 import org.take365.adapters.FeedAdapter
-import org.take365.Network.models.FeedItem
-import org.take365.Network.models.responses.feed.GetFeedResponse
+import org.take365.network.models.FeedItem
+import org.take365.network.models.responses.feed.GetFeedResponse
 import org.take365.R
 import org.take365.Take365Activity
 import org.take365.Take365App

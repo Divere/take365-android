@@ -1,6 +1,6 @@
-package org.take365.Network.models.responses.login
+package org.take365.network.models.responses.login
 
-import org.take365.Network.models.ErrorModel
+import org.take365.network.models.ErrorModel
 
 /**
  * Created by evgeniy on 08.02.16.

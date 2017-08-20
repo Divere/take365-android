@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-import org.take365.Network.models.StoryListItem
+import org.take365.network.models.StoryListItem
 import org.take365.R
 
 /**

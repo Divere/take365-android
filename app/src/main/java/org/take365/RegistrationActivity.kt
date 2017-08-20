@@ -3,7 +3,7 @@ package org.take365
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_registration.*
 
-import org.take365.Network.models.responses.BaseResponse
+import org.take365.network.models.responses.BaseResponse
 
 import retrofit2.Call
 import retrofit2.Callback

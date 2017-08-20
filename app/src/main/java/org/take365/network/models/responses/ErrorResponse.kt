@@ -1,4 +1,4 @@
-package org.take365.Network.models.responses
+package org.take365.network.models.responses
 
 
 /**

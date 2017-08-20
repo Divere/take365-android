@@ -23,11 +23,11 @@ import org.take365.components.ProgressRequestBody
 import org.take365.components.SpacesItemDecoration
 import org.take365.helpers.DpToPixelsConverter
 import org.take365.models.StoryDay
-import org.take365.Network.models.responses.BaseResponse
-import org.take365.Network.models.responses.story.GetStoryDetailsResponse
-import org.take365.Network.models.StoryDetails
-import org.take365.Network.models.StoryImage
-import org.take365.Network.models.StoryListItem
+import org.take365.network.models.responses.BaseResponse
+import org.take365.network.models.responses.story.GetStoryDetailsResponse
+import org.take365.network.models.StoryDetails
+import org.take365.network.models.StoryImage
+import org.take365.network.models.StoryListItem
 import org.take365.views.StoryDayView
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,4 +1,4 @@
-package org.take365.Network.models
+package org.take365.network.models
 
 import java.io.Serializable
 
