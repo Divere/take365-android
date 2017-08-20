@@ -10,9 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import org.take365.Views.FeedListView
+import org.take365.views.FeedListView
 
-import org.take365.Views.StoryListView
+import org.take365.views.StoryListView
 
 class MainActivity : Take365Activity(), NavigationView.OnNavigationItemSelectedListener {
 

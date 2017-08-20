@@ -4,14 +4,14 @@
 
 package org.take365.Network
 
-import org.take365.Network.Models.Response.BaseResponse
-import org.take365.Network.Models.Response.LoginResponse.LoginResponse
-import org.take365.Network.Models.Response.StoryResponse.GetStoryDetailsResponse
-import org.take365.Network.Models.Response.StoryResponse.GetStoryListResponse
+import org.take365.Network.models.responses.BaseResponse
+import org.take365.Network.models.responses.login.LoginResponse
+import org.take365.Network.models.responses.story.GetStoryDetailsResponse
+import org.take365.Network.models.responses.story.GetStoryListResponse
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.take365.Network.Models.Response.FeedResponse.GetFeedResponse
+import org.take365.Network.models.responses.feed.GetFeedResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

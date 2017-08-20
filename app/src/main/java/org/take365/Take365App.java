@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-import org.take365.Network.Models.Response.LoginResponse.LoginResult;
+import org.take365.Network.models.responses.login.LoginResult;
 import org.take365.Network.Take365Service;
 
 import java.io.IOException;

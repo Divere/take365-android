@@ -1,15 +1,14 @@
 package org.take365
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_photo_player.*
-import org.take365.Adapters.PhotoPlayerPagerAdapter
-import org.take365.Models.StoryDay
+import org.take365.adapters.PhotoPlayerPagerAdapter
+import org.take365.models.StoryDay
 import java.util.*
 
 class PhotoPlayerActivity : Take365Activity() {

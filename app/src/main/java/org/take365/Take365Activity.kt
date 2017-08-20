@@ -4,15 +4,14 @@ import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 
 import com.google.gson.Gson
 
-import org.take365.Network.Models.Response.BaseResponse
-import org.take365.Network.Models.Response.ErrorResponse
-import org.take365.Network.Models.Response.LoginResponse.LoginResult
+import org.take365.Network.models.responses.BaseResponse
+import org.take365.Network.models.responses.ErrorResponse
+import org.take365.Network.models.responses.login.LoginResult
 
 import java.io.IOException
 

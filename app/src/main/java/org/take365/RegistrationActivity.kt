@@ -1,13 +1,9 @@
 package org.take365
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_registration.*
 
-import org.take365.Network.Models.Response.BaseResponse
+import org.take365.Network.models.responses.BaseResponse
 
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,10 +1,9 @@
 package org.take365
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
-import org.take365.Network.Models.Response.LoginResponse.LoginResponse
+import org.take365.Network.models.responses.login.LoginResponse
 
 import retrofit2.Call
 import retrofit2.Callback
