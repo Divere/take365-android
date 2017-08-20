@@ -1,43 +1,30 @@
 package org.take365.Adapters
 
-import android.app.Activity
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_feed_item.view.*
-import org.take365.MainActivity
 import org.take365.Network.Models.Response.FeedResponse.FeedItem
-import org.take365.R
+import org.take365.Views.FeedItemView
 
 /**
  * Created by divere on 26/10/2016.
  */
 
-class FeedAdapter(context: Context, items: List<FeedItem>) : ArrayAdapter<FeedItem>(context, 0, items) {
+class FeedAdapter(val context: Context, val items: List<FeedItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
+    inner class FeedItemViewHolder(val feedItemView: FeedItemView) : RecyclerView.ViewHolder(feedItemView)
 
-        val item = this.getItem(position)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+        (holder as FeedItemViewHolder).feedItemView.feedItem = items[position]
+    }
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(this.context).inflate(R.layout.view_feed_item, parent, false)
-        }
+    override fun getItemCount(): Int {
+        return items.size
+    }
 
-        convertView!!.layoutParams.height = (context as MainActivity).viewsContainer.width
-        convertView.layoutParams.width = (context as MainActivity).viewsContainer.width
-        convertView.requestLayout()
-
-        convertView.tvDate.text = item.date
-        Picasso.with(context).load(item.story.authors[0].userpic?.url).into(convertView.ivAuthorAvatar)
-        convertView.tvAuthorName.text = item.story.authors[0].username
-        convertView.tvStoryName.text = item.story.title
-        Picasso.with(context).load(item.thumbLarge.url).into(convertView.ivImage)
-
-        return convertView
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+        val view = FeedItemView(parent!!.context)
+        return FeedItemViewHolder(view)
     }
 }

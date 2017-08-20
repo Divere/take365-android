@@ -1,6 +1,7 @@
 package org.take365.DrawerActivityViews
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -46,7 +47,8 @@ class FeedListView(context: Context) : FrameLayout(context) {
                 if (feedItems!!.isEmpty()) {
                     tvEmptyFeed.visibility = View.VISIBLE
                 }
-                lvFeed.adapter = FeedAdapter(context, feedItems!!)
+                rvFeed.layoutManager = LinearLayoutManager(context)
+                rvFeed.adapter = FeedAdapter(context, feedItems!!)
             }
 
             override fun onFailure(call: Call<GetFeedResponse>?, t: Throwable?) {

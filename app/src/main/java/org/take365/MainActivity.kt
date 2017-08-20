@@ -100,12 +100,14 @@ class MainActivity : Take365Activity(), NavigationView.OnNavigationItemSelectedL
         setView(feedView)
         feedView.updateFeed()
         title = "Лента"
+        fab.visibility = View.GONE
     }
 
     private fun showStories() {
         setView(storyListView)
         storyListView.updateStoryList()
         title = "Мои истории"
+        fab.visibility = View.VISIBLE
     }
 
     private fun setView(view: View) {
