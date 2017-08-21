@@ -2,6 +2,7 @@ package org.take365.components
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 
 import java.io.File
 import java.io.FileInputStream
@@ -53,36 +54,43 @@ class ProgressRequestBody : RequestBody {
     override fun writeTo(sink: BufferedSink) {
 
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-        var `in`: InputStream? = null
+        var inputStream: InputStream? = null
         var fileLength: Long = 0
         if (mFile != null) {
             fileLength = mFile!!.length()
-            `in` = FileInputStream(mFile)
+            inputStream = FileInputStream(mFile)
         }
         if (mInputStream != null) {
             fileLength = mInputStream!!.available().toLong()
-            `in` = mInputStream
+            inputStream = mInputStream
         }
 
-        if (`in` == null) {
+        if (inputStream == null) {
             return
         }
 
         var uploaded: Long = 0
 
+        val handler = Handler(Looper.getMainLooper())
         try {
-            val handler = Handler(Looper.getMainLooper())
-            while (true) {
-                val read = `in`.read(buffer)
-                if (read == -1) return
+            while (uploaded != fileLength) {
+                val read = inputStream.read(buffer)
+                if (read == -1) break
                 // update progress on UI thread
                 handler.post(ProgressUpdater(uploaded, fileLength))
 
                 uploaded += read.toLong()
                 sink.write(buffer, 0, read)
+
+                if(uploaded == fileLength) {
+                    Log.d("take365", "Uploaded: $uploaded, FileLength: $fileLength")
+                    break
+                }
             }
+        } catch (e: IOException) {
+            e.printStackTrace()
         } finally {
-            `in`.close()
+            inputStream.close()
         }
     }
 
