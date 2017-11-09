@@ -36,10 +36,10 @@ open class Take365AuthActivity : Take365Activity() {
     }
 
     protected fun handleSuccessAuthResponse(response: Response<LoginResponse>) {
-        if (response.isSuccessful && response.body().result != null) {
+        if (response.isSuccessful && response.body()!!.result != null) {
             val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-            preferences.edit().putString("access_token", response.body().result!!.token).apply()
-            Take365App.setCurrentUser(response.body().result)
+            preferences.edit().putString("access_token", response.body()!!.result!!.token).apply()
+            Take365App.setCurrentUser(response.body()!!.result)
             startActivity(Intent(this, MainActivity::class.java))
         }
     }

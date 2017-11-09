@@ -41,7 +41,7 @@ class ProgressRequestBody : RequestBody {
 
     override fun contentType(): MediaType {
         // i want to upload only images
-        return MediaType.parse("image/*")
+        return MediaType.parse("image/*")!!
     }
 
     @Throws(IOException::class)

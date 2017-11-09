@@ -180,7 +180,7 @@ class StoryActivity : Take365Activity() {
                     return
                 }
 
-                storyInfo = responseGet.body().result
+                storyInfo = responseGet.body()?.result
                 try {
                     renderStoryInfo()
                 } catch (e: ParseException) {
@@ -244,7 +244,7 @@ class StoryActivity : Take365Activity() {
 
         val firstDay = StoryDay()
         firstDay.day = df.format(calendar.time)
-        firstDay.image = imagesByDays!![firstDay.day]!!
+        firstDay.image = imagesByDays?.let { imagesByDays!![firstDay.day] }
 
         if (isContributingStory) {
             days!!.add(0, firstDay)

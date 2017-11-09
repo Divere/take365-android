@@ -41,8 +41,8 @@ class StoryListView(context: Context) : FrameLayout(context) {
                     return
                 }
 
-                stories = response.body().result
-                if (stories!!.size == 0) {
+                stories = response.body()!!.result
+                if (stories!!.isEmpty()) {
                     tvNoStories.visibility = View.VISIBLE
                 }
                 lvStories.adapter = StoryListAdapter(context, stories!!)

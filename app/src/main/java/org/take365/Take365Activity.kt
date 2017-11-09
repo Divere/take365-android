@@ -57,7 +57,7 @@ open class Take365Activity : AppCompatActivity() {
         var responseString: String? = null
 
         try {
-            responseString = response.errorBody().string()
+            responseString = response.errorBody()?.string()
         } catch (e: IOException) {
             e.printStackTrace()
         }

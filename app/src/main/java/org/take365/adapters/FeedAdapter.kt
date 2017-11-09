@@ -18,24 +18,24 @@ import retrofit2.Response
 
 class FeedAdapter(val context: Context, val emptyFeedEvent: (() -> Unit)?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items: MutableList<FeedItem> = mutableListOf()
-    var currentPage = 1
-    var isRequestInProcess = false
-    var isLatestPageLoaded = false
+    private var items: MutableList<FeedItem> = mutableListOf()
+    private var currentPage = 1
+    private var isRequestInProcess = false
+    private var isLatestPageLoaded = false
 
     init {
         getFeed { response ->
-            if (response.body().result!!.isEmpty) {
+            if (response.body()!!.result!!.isEmpty) {
                 emptyFeedEvent?.invoke()
                 return@getFeed
             }
 
-            items.addAll(response.body().result!!.list)
+            items.addAll(response.body()!!.result!!.list)
             notifyDataSetChanged()
         }
     }
 
-    fun getFeed(success: (response: Response<GetFeedResponse>) -> Unit) {
+    private fun getFeed(success: (response: Response<GetFeedResponse>) -> Unit) {
         Take365App.getApi().getFeed(currentPage, 20).enqueue(object : Callback<GetFeedResponse> {
             override fun onResponse(call: Call<GetFeedResponse>?, response: Response<GetFeedResponse>?) {
                 if (!response!!.isSuccessful) {
@@ -61,11 +61,11 @@ class FeedAdapter(val context: Context, val emptyFeedEvent: (() -> Unit)?) : Rec
             currentPage++
             getFeed { response ->
                 isRequestInProcess = false
-                if (response.body().result!!.isEmpty) {
+                if (response.body()!!.result!!.isEmpty) {
                     isLatestPageLoaded = true
                     return@getFeed
                 } else {
-                    items.addAll(response.body().result!!.list)
+                    items.addAll(response.body()!!.result!!.list)
                     notifyDataSetChanged()
                 }
             }
