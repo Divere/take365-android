@@ -72,8 +72,7 @@ class StoryActivity : Take365Activity() {
 
                 val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
                 val imageFileName = timeStamp + ".jpg"
-                val storageDir = Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES)
+                val storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 pictureImagePath = storageDir.absolutePath + "/" + imageFileName
                 val file = File(pictureImagePath)
                 val outputFileUri = FileProvider.getUriForFile(this@StoryActivity, this@StoryActivity.applicationContext.packageName + ".provider", file)
@@ -137,6 +136,8 @@ class StoryActivity : Take365Activity() {
             }
         }
 
+        var tmpFile: File? = null
+
         val resultCallback = object : Callback<BaseResponse> {
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 if (!response.isSuccessful) {
@@ -144,10 +145,14 @@ class StoryActivity : Take365Activity() {
                 }
 
                 refreshStoryInfo()
+                tmpFile?.delete()
+                tmpFile = null
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
                 showConnectionError()
+                tmpFile?.delete()
+                tmpFile = null
             }
         }
 
@@ -163,7 +168,11 @@ class StoryActivity : Take365Activity() {
             PICK_IMAGE -> {
                 try {
                     val inputStream = this@StoryActivity.contentResolver.openInputStream(data?.data!!)
-                    ImageUploader.uploadImage(currentStory!!.id, inputStream, selectedDate, progressCallback, resultCallback)
+                    tmpFile = File.createTempFile("take365","")
+                    val buffer = ByteArray(inputStream.available())
+                    inputStream.read(buffer)
+                    tmpFile!!.writeBytes(buffer)
+                    ImageUploader.uploadImage(currentStory!!.id, tmpFile!!, selectedDate, progressCallback, resultCallback)
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 }

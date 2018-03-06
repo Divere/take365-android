@@ -39,7 +39,7 @@ class MainActivity : Take365Activity(), NavigationView.OnNavigationItemSelectedL
         storyListView = StoryListView(this)
         feedView = FeedListView(this)
 
-        showStories()
+        showFeed()
     }
 
     override fun onResume() {

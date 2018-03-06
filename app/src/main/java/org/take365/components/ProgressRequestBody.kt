@@ -44,13 +44,10 @@ class ProgressRequestBody : RequestBody {
         return MediaType.parse("image/*")!!
     }
 
-    @Throws(IOException::class)
     override fun contentLength(): Long {
         return mFile?.length() ?: (mInputStream?.available()?.toLong() ?: 0)
-
     }
 
-    @Throws(IOException::class)
     override fun writeTo(sink: BufferedSink) {
 
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
