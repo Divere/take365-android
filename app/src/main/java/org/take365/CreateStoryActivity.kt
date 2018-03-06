@@ -5,6 +5,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_create_story.*
 
 import org.take365.network.models.responses.BaseResponse
+import org.take365.network.models.responses.story.CreateStoryResponse
 
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -25,18 +26,19 @@ class CreateStoryActivity : Take365Activity() {
             val status = if (swPrivacy.isChecked) 0 else 1
             val df = SimpleDateFormat("yyyy-MM-dd")
             val todayString = df.format(Date())
-            Take365App.getApi().createStory(todayString, status, etStoryName.text.toString(), etDescription.text.toString()).enqueue(object : Callback<BaseResponse> {
-                override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+            Take365App.getApi().createStory(todayString, status, etStoryName.text.toString(), etDescription.text.toString()).enqueue(object : Callback<CreateStoryResponse> {
+                override fun onResponse(call: Call<CreateStoryResponse>, response: Response<CreateStoryResponse>) {
                     hideProgressDialog()
                     if (!response.isSuccessful) {
                         showApiError(response)
                         return
                     }
 
-                    startActivity(Intent(this@CreateStoryActivity, MainActivity::class.java))
+                    StoryActivity.startActivity(this@CreateStoryActivity, response.body()!!.result)
+                    finish()
                 }
 
-                override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                override fun onFailure(call: Call<CreateStoryResponse>, t: Throwable) {
                     hideProgressDialog()
                     showConnectionError()
                 }

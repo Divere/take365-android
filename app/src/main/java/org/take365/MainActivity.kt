@@ -29,8 +29,7 @@ class MainActivity : Take365Activity(), NavigationView.OnNavigationItemSelectedL
 
         fab.setOnClickListener { startActivity(Intent(this@MainActivity, CreateStoryActivity::class.java)) }
 
-        val toggle = ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.setDrawerListener(toggle)
         toggle.syncState()
 
@@ -39,6 +38,7 @@ class MainActivity : Take365Activity(), NavigationView.OnNavigationItemSelectedL
         storyListView = StoryListView(this)
         feedView = FeedListView(this)
 
+        navigationView.menu.getItem(1).isChecked = true
         showFeed()
     }
 

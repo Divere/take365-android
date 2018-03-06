@@ -14,6 +14,7 @@ import okhttp3.RequestBody
 import okhttp3.Response
 import okhttp3.ResponseBody
 import org.take365.network.models.responses.feed.GetFeedResponse
+import org.take365.network.models.responses.story.CreateStoryResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -46,7 +47,7 @@ interface Take365Service {
 
     @FormUrlEncoded
     @POST("story/write")
-    fun createStory(@Field("startDate") startDate: String, @Field("status") status: Int, @Field("title") title: String, @Field("description") description: String): Call<BaseResponse>
+    fun createStory(@Field("startDate") startDate: String, @Field("status") status: Int, @Field("title") title: String, @Field("description") description: String): Call<CreateStoryResponse>
 
     @Multipart
     @POST("media/upload")

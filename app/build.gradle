@@ -24,10 +24,10 @@ android {
 
     defaultConfig {
         applicationId "org.take365.take365"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 26
-        versionCode 9
-        versionName "1.0.5"
+        versionCode 11
+        versionName "1.1.1"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {

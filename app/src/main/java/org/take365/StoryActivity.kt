@@ -145,12 +145,16 @@ class StoryActivity : Take365Activity() {
                 }
 
                 refreshStoryInfo()
-                tmpFile?.delete()
-                tmpFile = null
+                cleanUp()
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
                 showConnectionError()
+                cleanUp()
+            }
+
+            private fun cleanUp() {
+                storyRecycleAdapter!!.setUploadProgress(selectedDate!!, 0)
                 tmpFile?.delete()
                 tmpFile = null
             }
