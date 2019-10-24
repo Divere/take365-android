@@ -1,7 +1,7 @@
 package org.take365.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import org.take365.Take365Activity
 import org.take365.Take365App
@@ -54,7 +54,7 @@ class FeedAdapter(val context: Context, val emptyFeedEvent: (() -> Unit)?) : Rec
 
     inner class FeedItemViewHolder(val feedItemView: FeedItemView) : RecyclerView.ViewHolder(feedItemView)
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as FeedItemViewHolder).feedItemView.feedItem = items[position]
         if (itemCount - position < 5 && !isRequestInProcess && !isLatestPageLoaded) {
             isRequestInProcess = true
@@ -76,7 +76,7 @@ class FeedAdapter(val context: Context, val emptyFeedEvent: (() -> Unit)?) : Rec
         return items.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FeedItemViewHolder(FeedItemView(parent!!.context))
     }
 }

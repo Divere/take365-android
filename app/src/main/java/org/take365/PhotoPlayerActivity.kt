@@ -1,9 +1,9 @@
 package org.take365
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_photo_player.*

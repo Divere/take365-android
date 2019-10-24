@@ -10,9 +10,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.widget.GridLayoutManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.View
 import com.crashlytics.android.Crashlytics
 import kotlinx.android.synthetic.main.activity_story.*
@@ -173,7 +173,7 @@ class StoryActivity : Take365Activity() {
                 try {
                     val inputStream = this@StoryActivity.contentResolver.openInputStream(data?.data!!)
                     tmpFile = File.createTempFile("take365","")
-                    val buffer = ByteArray(inputStream.available())
+                    val buffer = ByteArray(inputStream!!.available())
                     inputStream.read(buffer)
                     tmpFile!!.writeBytes(buffer)
                     ImageUploader.uploadImage(currentStory!!.id, tmpFile!!, selectedDate, progressCallback, resultCallback)

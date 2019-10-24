@@ -1,7 +1,7 @@
 package org.take365.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,12 +24,12 @@ import java.util.Locale
 
 class PhotoPlayerFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_photo_player, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_photo_player, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        val day = arguments.getSerializable("storyDay") as StoryDay
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val day = arguments!!.getSerializable("storyDay") as StoryDay
 
         var date = Date()
         val df = SimpleDateFormat("yyyy-MM-dd")

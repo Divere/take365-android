@@ -1,7 +1,7 @@
 package org.take365.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 
@@ -64,11 +64,11 @@ class StoryRecycleAdapter(private val context: Context, sections: TreeMap<String
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
-        when (viewType) {
-            ElementsType.VIEW_HEADER -> return HeaderViewHolder(StorySectionView(parent.context))
-            ElementsType.VIEW_NORMAL -> return ViewHolder(StoryDayView(parent.context))
-            else -> return null
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ElementsType.VIEW_HEADER -> HeaderViewHolder(StorySectionView(parent.context))
+            ElementsType.VIEW_NORMAL -> ViewHolder(StoryDayView(parent.context))
+            else -> ViewHolder(StoryDayView(parent.context))
         }
     }
 
@@ -98,7 +98,7 @@ class StoryRecycleAdapter(private val context: Context, sections: TreeMap<String
         }
     }
 
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder?) {
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
         if (holder is ViewHolder) {
             if (this.visibleViews == null) {
@@ -108,7 +108,7 @@ class StoryRecycleAdapter(private val context: Context, sections: TreeMap<String
         }
     }
 
-    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder?) {
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
         if (holder is ViewHolder) {
             visibleViews!!.remove(holder.dayView.storyDay.day)
