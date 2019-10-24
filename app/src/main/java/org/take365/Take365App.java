@@ -27,7 +27,7 @@ public class Take365App extends Application {
 
     private static Take365App application;
 
-    private static final String API_URI = "https://take365.org/api/";
+    private static final String API_URI = "http://take365.vasa.tech/api/";
 
     private static Take365Service service;
     private static LoginResult currentUser;
